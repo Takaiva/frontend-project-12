@@ -1,0 +1,23 @@
+{
+  "name": "frontend-project-12",
+  "version": "1.0.0",
+  "description": "My fourth frontend project",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build --prefix frontend",
+    "start": "start-server -s ./frontend/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Takaiva/frontend-project-12.git"
+  },
+  "author": "Takaiva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Takaiva/frontend-project-12/issues"
+  },
+  "homepage": "https://github.com/Takaiva/frontend-project-12#readme",
+  "dependencies": {
+    "@hexlet/chat-server": "^1.1.6"
+  }
+}

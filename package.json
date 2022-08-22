@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "My fourth frontend project",
   "engines": {
-    "node": "18.x"
+    "node": "18.3.0",
+    "npm": "8.11.0"
   },
   "main": "index.js",
   "scripts": {

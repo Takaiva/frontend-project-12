@@ -2,6 +2,9 @@
   "name": "frontend-project-12",
   "version": "1.0.0",
   "description": "My fourth frontend project",
+  "engines": {
+    "node": "18.x"
+  },
   "main": "index.js",
   "scripts": {
     "build": "npm run build --prefix frontend",

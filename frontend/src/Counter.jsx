@@ -23,9 +23,9 @@ const Counter = () => {
                 </button>
                 <button
                     aria-label="Increment by amount value"
-                    onClick={() => dispatch(incrementByAmount({ amount: 23 }))}
+                    onClick={() => dispatch(incrementByAmount({ amount: 24 }))}
                 >
-                    Прибавить 23
+                    Прибавить 24
                 </button>
             </div>
         </div>

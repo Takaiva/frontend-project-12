@@ -1,0 +1,36 @@
+$gradient-font-color: linear-gradient(to right, darkorange, #81d02f, darkorange, #ee4c4c);
+
+.atures-font {
+  font-family: "AturesBold";
+  font-size: 2rem;
+  line-height: 2rem;
+
+  color: transparent;
+  -webkit-background-clip: text;
+  background-size: 150% 100%;
+  background-position: 100%;
+  transition: background-position 275ms ease;
+  background-image: $gradient-font-color;
+  &:hover {
+    background-position: 0 100%;
+    color: transparent;
+  }
+}
+
+
+nav {
+  border-bottom: thick double orange;
+}
+
+.invalid-tooltip {
+  background-color: rgba(220,53,69,.9);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: .875rem;
+  margin-top: 0.1rem;
+  max-width: 100%;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  top: 100%;
+  z-index: 5;
+}

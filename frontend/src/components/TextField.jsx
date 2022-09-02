@@ -3,6 +3,7 @@ import { ErrorMessage, useField } from "formik";
 
 export const TextField = ({ label, ...props }) => {
     const [field, meta] = useField(props);
+    console.log(field);
     //const borderClass = meta.touched && meta.error ? 'is-invalid' : 'border-dark';
     return (
         <div className="mb-3 form-floating">

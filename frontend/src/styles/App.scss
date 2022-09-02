@@ -22,7 +22,17 @@ nav {
   border-bottom: thick double orange;
 }
 
-.invalid-tooltip {
+.card {
+  border-radius: 10px 25px 10px 25px;
+  border: 2px solid #04DAF6;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+}
+
+.invalid-feedback {
   background-color: rgba(220,53,69,.9);
   border-radius: 0.25rem;
   color: #fff;

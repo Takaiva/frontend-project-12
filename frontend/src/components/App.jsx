@@ -1,6 +1,6 @@
 import './../styles/App.scss';
-import React, {useEffect, useState} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import './../styles/index.scss';
+import React, { useState } from "react";
 import {
     BrowserRouter as Router,
     Routes,
@@ -10,10 +10,12 @@ import {
     Outlet,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./Navbar.jsx";
 import SignInPage from "./SignIn.jsx";
 import SignUpPage from "./SignUp.jsx";
+import ChatPage from "./ChatPage.jsx";
 
 import { AuthContext } from "../contexts/index.js";
 import { useAuth } from "../hooks/index.js";
@@ -22,6 +24,12 @@ import routes from '../routes.js';
 const AuthProvider = ({ children }) => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
+
+    const getUserName = () => {
+        const { username } = JSON.parse(localStorage.getItem('user'));
+        return username;
+    }
+
     const logIn = (userData) => {
         localStorage.setItem('user', JSON.stringify(userData));
         setUser({ username: userData.username });
@@ -43,6 +51,7 @@ const AuthProvider = ({ children }) => {
                 logIn,
                 logOut,
                 getAuthHeader,
+                getUserName,
                 user,
             }}
             >
@@ -83,13 +92,23 @@ const App = () => {
                     <Routes>
                         <Route path={routes.signUpPagePath()} element={<IsLoggedIn><SignUpPage /></IsLoggedIn>} />
                         <Route path={routes.signInPagePath()} element={<IsLoggedIn><SignInPage /></IsLoggedIn>} />
-                        <Route path={routes.chatPagePath()} element={<PrivateOutlet />}>
-                            <Route path="" element={<SignUpPage />} />
+                        <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
+                            <Route path="" element={<ChatPage />} />
                         </Route>
                         <Route path="*" element={<PageNotFound />} />
                     </Routes>
                 </div>
-                <ToastContainer />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </Router>
         </AuthProvider>
     );

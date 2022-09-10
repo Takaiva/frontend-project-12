@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useFormik } from 'formik';
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Card, Form, Row, Col, Container } from "react-bootstrap";
 import * as yup from 'yup';
 import axios from 'axios';
@@ -33,7 +33,7 @@ const SignInPage = () => {
         }),
         onSubmit: async (values) => {
             try {
-                const response = await axios.post(routes.loginPath(), values);
+                const response = await axios.post(routes.signInPath(), values);
                 auth.logIn(response.data);
                 setAuthIsFailed(false);
                 navigate(routes.chatPagePath());
@@ -80,7 +80,7 @@ const SignInPage = () => {
                                 <Button
                                     variant="outline-primary"
                                     type="submit"
-                                    className="w-100 mb-3 pb-3 pt-3 shadow-sm"
+                                    className="w-100 mb-3 mt-4 pb-3 pt-3 shadow-sm"
                                     style={{ "borderRadius": "15px", "lineHeight": "1rem", "fontSize": "1.5rem" }}
                                 >
                                     Submit

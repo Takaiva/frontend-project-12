@@ -1,12 +1,13 @@
 import { Form, FloatingLabel } from "react-bootstrap";
 import React from "react";
 
-export const SignInInputField = ({ formik, label, name, inputRef = null, authIsFailed }) => {
+export const SignInInputField = ({ formik, label, name, inputRef = null, authIsFailed, ...props }) => {
 
     const isInvalid = (formik.touched[name] && formik.errors[name]) || authIsFailed;
     return (
         <FloatingLabel label={label} controlId={name} className="mb-3">
             <Form.Control
+                {...props}
                 className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
                 name={name}
                 placeholder={label}

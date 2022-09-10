@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Navbar, Container } from "react-bootstrap";
+import { Navbar, Container } from "react-bootstrap";
 import routes from '../routes.js';
 
 const NavbarLayout = () => {

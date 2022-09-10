@@ -33,8 +33,14 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "rules": {
+      "react/prop-types": 0,
+      "react/no-unused-vars": 0
+    }
   },
   "browserslist": {
     "production": [
@@ -50,7 +56,6 @@
   },
   "devDependencies": {
     "eslint": "^8.23.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-react": "^7.31.1"
+    "eslint-config-airbnb": "^19.0.4"
   }
 }

@@ -9,13 +9,15 @@ import {
 import * as yup from 'yup';
 import axios from 'axios';
 
-import { SignInInputField } from "./SignInInputField.jsx";
+import { SignUpInputField } from "./SignUpInputField.jsx";
 import routes from '../routes.js';
+import { useAuth } from "../hooks";
 
 const SignUpPage = () => {
-    const [authIsFailed, setAuthIsFailed] = useState(false);
+    const [regIsFailed, setRegIsFailed] = useState(false);
     const navigate = useNavigate();
     const inputRef = useRef();
+    const auth = useAuth();
 
     useEffect(() => {
         inputRef.current.focus();
@@ -25,23 +27,45 @@ const SignUpPage = () => {
         initialValues: {
             username: '',
             password: '',
+            confirmPassword: '',
         },
         validationSchema: yup.object({
-            username: yup.string()
+            username: yup
+                .string()
+                .trim()
+                .required('Username is required')
                 .min(3, 'Username must be at least 3 characters')
-                .max(20, 'Username must be 20 characters or less')
-                .required('Username is required'),
-            password: yup.string()
-                .min(5, 'Password must be at least 6 characters')
+                .max(20, 'Username must be 20 characters or less'),
+            password: yup
+                .string()
+                .trim()
+                .required('Password is required')
+                .min(6, 'Password must be at least 6 characters')
                 .required('Password is required'),
+            confirmPassword: yup
+                .string()
+                .test('confirmPassword', 'passwords must match', (value, context) => value === context.parent.password),
         }),
         onSubmit: async (values) => {
-            //const response = await axios.post(routes.loginPath(), values);
-            //localStorage.setItem('user', JSON.stringify(response.data));
-            //setAuthIsFailed(false);
-            console.log(values);
 
-        }
+            try {
+                const response = await axios.post(
+                    routes.signUpPath(),
+                    { username: values.username, password: values.password });
+                auth.logIn(response.data);
+                navigate(routes.chatPagePath());
+            } catch (err) {
+                if (!err.isAxiosError) {
+                    throw err;
+                }
+                if (err.response.status === 409) {
+                    setRegIsFailed(true);
+                    inputRef.current.select();
+                    return;
+                }
+                throw err;
+            }
+        },
     })
     return (
         <Card className="card shadow">
@@ -50,9 +74,27 @@ const SignUpPage = () => {
                 <Form
                     onSubmit={formik.handleSubmit}
                     className="col-12 col-md-0 mt-3 mt-mb-0"
+                    noValidate
                 >
-                    <SignInInputField formik={formik} label="Username" name="username" inputRef={inputRef} authIsFailed={authIsFailed} />
-                    <SignInInputField formik={formik} label="Password" name="password" authIsFailed={authIsFailed} />
+                    <SignUpInputField
+                        formik={formik}
+                        label="Username"
+                        name="username"
+                        inputRef={inputRef}
+                        regIsFailed={regIsFailed}
+                    />
+                    <SignUpInputField
+                        formik={formik}
+                        label="Password"
+                        name="password"
+                        type="password"
+                        regIsFailed={regIsFailed} />
+                    <SignUpInputField
+                        formik={formik}
+                        label="Confirm password"
+                        name="confirmPassword"
+                        type="password"
+                        regIsFailed={regIsFailed} />
                     <Button
                         variant="outline-primary"
                         type="submit"

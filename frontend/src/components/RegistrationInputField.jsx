@@ -1,7 +1,7 @@
 import { Form, FloatingLabel } from "react-bootstrap";
 import React from "react";
 
-export const SignUpInputField = ({ formik, label, name, inputRef = null, regIsFailed, ...props }) => {
+export const RegistrationInputField = ({ formik, label, name, inputRef = null, regIsFailed, ...props }) => {
 
     const isInvalid = (formik.touched[name] && formik.errors[name]) || regIsFailed;
     return (

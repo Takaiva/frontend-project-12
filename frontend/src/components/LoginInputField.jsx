@@ -1,14 +1,19 @@
 import { Form, FloatingLabel } from "react-bootstrap";
 import React from "react";
 
-export const SignInInputField = ({ formik, label, name, inputRef = null, authIsFailed, ...props }) => {
+export const LoginInputField = ({ formik, label, name, inputRef = null, authIsFailed, ...props }) => {
 
     const isInvalid = (formik.touched[name] && formik.errors[name]) || authIsFailed;
+    const authRejected = name === 'password' ?
+        <Form.Control.Feedback type="invalid">There is no such account</Form.Control.Feedback> : null;
+    const feedback = formik.errors[name] ?
+        <Form.Control.Feedback type="invalid">{formik.errors[name]}</Form.Control.Feedback> : authRejected;
     return (
         <FloatingLabel label={label} controlId={name} className="mb-3">
             <Form.Control
                 {...props}
                 className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
+                type={name === 'password' ? 'password' : null }
                 name={name}
                 placeholder={label}
                 ref={inputRef}
@@ -18,9 +23,7 @@ export const SignInInputField = ({ formik, label, name, inputRef = null, authIsF
                 style={{ "borderRadius": "5px 15px 5px 15px" }}
                 required
             />
-            <Form.Control.Feedback type="invalid">
-                {formik.errors[name] ? formik.errors[name] : null}
-            </Form.Control.Feedback>
+            {feedback}
         </FloatingLabel>
     );
-}
+};

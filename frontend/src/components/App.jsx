@@ -1,6 +1,11 @@
 import './../styles/App.scss';
 import './../styles/index.scss';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { actions as chatActions } from "../slices/messagesSlice.js";
+//import { actions as channelsActions } from "../slices/channelsSlice.js";
+import { io } from 'socket.io-client';
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -13,13 +18,40 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./Navbar.jsx";
-import SignInPage from "./SignIn.jsx";
-import SignUpPage from "./SignUp.jsx";
+import LoginPage from "./LoginPage.jsx";
+import RegistrationPage from "./RegistrationPage.jsx";
 import ChatPage from "./ChatPage.jsx";
 
-import { AuthContext } from "../contexts/index.js";
+import { AuthContext, ApiContext } from "../contexts/index.js";
 import { useAuth } from "../hooks/index.js";
 import routes from '../routes.js';
+
+const ChatApiProvider = ({ children }) => {
+    const socket = io();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+       socket.on('newMessage', (message) => {
+           dispatch(chatActions.addMessage(message));
+       });
+    }, [socket, dispatch]);
+
+    const sendMessage = (message, handleResponse) => {
+        socket.emit('newMessage', message, (response) => {
+            handleResponse(response);
+        });
+    };
+
+    return (
+        <ApiContext.Provider
+            value={{
+                sendMessage
+            }}
+        >
+            {children}
+        </ApiContext.Provider>
+    );
+};
 
 const AuthProvider = ({ children }) => {
     const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -70,7 +102,7 @@ const IsLoggedIn = ({ children }) => {
 const PrivateOutlet = () => {
     const { user } = useAuth();
     return (
-        user ? <Outlet /> : <Navigate to={routes.signInPagePath()} />
+        user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />
     );
 };
 
@@ -86,30 +118,32 @@ const PageNotFound = () => {
 const App = () => {
     return (
         <AuthProvider>
-            <Router>
-                <div className="d-flex flex-column h-100">
-                    <Navbar />
-                    <Routes>
-                        <Route path={routes.signUpPagePath()} element={<IsLoggedIn><SignUpPage /></IsLoggedIn>} />
-                        <Route path={routes.signInPagePath()} element={<IsLoggedIn><SignInPage /></IsLoggedIn>} />
-                        <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
-                            <Route path="" element={<ChatPage />} />
-                        </Route>
-                        <Route path="*" element={<PageNotFound />} />
-                    </Routes>
-                </div>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-            </Router>
+            <ChatApiProvider>
+                <Router>
+                    <div className="d-flex flex-column h-100" id="fading">
+                        <Navbar />
+                        <Routes>
+                            <Route path={routes.registrationPagePath()} element={<IsLoggedIn><RegistrationPage /></IsLoggedIn>} />
+                            <Route path={routes.loginPagePath()} element={<IsLoggedIn><LoginPage /></IsLoggedIn>} />
+                            <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
+                                <Route path="" element={<ChatPage />} />
+                            </Route>
+                            <Route path="*" element={<PageNotFound />} />
+                        </Routes>
+                    </div>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+                </Router>
+            </ChatApiProvider>
         </AuthProvider>
     );
 };

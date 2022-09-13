@@ -6,11 +6,11 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import { SignInInputField } from "./SignInInputField.jsx";
+import { LoginInputField } from "./LoginInputField.jsx";
 import { useAuth } from "../hooks";
 import routes from '../routes.js';
 
-const SignInPage = () => {
+const LoginPage = () => {
     const [authIsFailed, setAuthIsFailed] = useState(false);
     const auth = useAuth();
     const navigate = useNavigate();
@@ -33,30 +33,31 @@ const SignInPage = () => {
         }),
         onSubmit: async (values) => {
             try {
-                const response = await axios.post(routes.signInPath(), values);
+                const response = await axios.post(routes.loginPath(), values);
                 auth.logIn(response.data);
                 setAuthIsFailed(false);
+                toast.success('Logged in successfully');
                 navigate(routes.chatPagePath());
             } catch (err) {
                 if (!err.isAxiosError) {
-                    toast.error('There is no such user');
+                    toast.error('Internet connection error');
                     return;
                 }
                 if (err.response?.status === 401) {
                     setAuthIsFailed(true);
                     inputRef.current.select();
                 } else {
-                    toast.error('Ошибка сети')
+                    toast.error('Something went wrong. Try again later.');
                 }
             }
 
         }
     })
     return (
-        <Container fluid className="h-100">
+        <Container fluid className="h-100" id="wallpaper">
             <Row className="h-100 justify-content-center align-content-center">
                 <Col md="8" xxl="6" className="col-12">
-                    <Card className="card shadow">
+                    <Card className="shadow">
                         <Card.Body className="row p-5">
                             <h1 className="mb-4 text-center">Sign In</h1>
                             <Form
@@ -64,14 +65,14 @@ const SignInPage = () => {
                                 className="col-12 col-md-0 mt-3 mt-mb-0"
                                 noValidate
                             >
-                                <SignInInputField
+                                <LoginInputField
                                     formik={formik}
                                     label="Username"
                                     name="username"
                                     inputRef={inputRef}
                                     authIsFailed={authIsFailed}
                                 />
-                                <SignInInputField
+                                <LoginInputField
                                     formik={formik}
                                     label="Password"
                                     name="password"
@@ -90,7 +91,7 @@ const SignInPage = () => {
                         <Card.Footer className="p-4" style={{"borderRadius": "0px 0px 10px 25px"}}>
                             <div className="text-center">
                                 <span>New here? </span>
-                                <Link to={routes.signUpPagePath()}>Get a pass to the station.</Link>
+                                <Link to={routes.registrationPagePath()}>Get a pass to the station.</Link>
                             </div>
                         </Card.Footer>
                     </Card>
@@ -100,4 +101,4 @@ const SignInPage = () => {
     );
 };
 
-export default  SignInPage;
+export default  LoginPage;

@@ -1,9 +1,4 @@
 $gradient-font-color: linear-gradient(to right, darkorange, #81d02f, darkorange, #ee4c4c);
-$input-border-color: rgb(255, 106, 0);
-
-:export {
-  orangeBorder: $input-border-color;
-}
 
 .atures-font {
   font-family: "AturesBold";
@@ -24,7 +19,7 @@ $input-border-color: rgb(255, 106, 0);
 
 
 nav {
-  border-bottom: solid 1px rgb(255, 106, 0);
+  border-bottom: solid 1.7px rgba(255, 106, 0, 0.85);
 
 }
 
@@ -51,23 +46,6 @@ nav {
   z-index: 5;
 }
 
-div.container-fluid > div.row {
-  background: rgba(9, 8, 7, 0.7);
-}
-
-div.container-fluid:after {
-  content: "";
-  background-image: url("../assets/gates1.png");
-  background-size: 100% 100%;
-  opacity: 0.8;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}
-
 #wallpaper:after {
   content: "";
   background-image: url("../assets/gates1.png");
@@ -80,3 +58,55 @@ div.container-fluid:after {
   position: absolute;
   z-index: -1;
 }
+
+#fading {
+  background: rgba(9, 8, 7, 0.7);
+}
+
+#channel {
+  font-size: 1.2em;
+
+  border: 2px solid rgba(238, 133, 76, 0.65);
+  border-radius: 5px 10px 5px 10px;
+  color: black;
+}
+
+.add-channel {
+  font-size: 1.2rem;
+  font-weight: normal;
+
+  color: black;
+  &:hover {
+    background: linear-gradient(45deg, rgba(255, 98, 0, 0.61), rgba(239, 219, 7, 0.87));
+    background-size: 400% 450%;
+  }
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#sendMessage:disabled {
+  border: none;
+  opacity: 0.60;
+  outline: none;
+}
+
+.activeChannel {
+  color: black;
+  border-color: #0e7563;
+  background: linear-gradient(45deg, rgba(28, 145, 96, 0.57), rgba(239, 219, 7, 0.62), rgba(255, 98, 0, 0.61));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: auto;
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+

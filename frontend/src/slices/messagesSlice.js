@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-//import { actions as channelsActions } from './channelsSlice.js';
+import { actions as channelsActions } from './channelsSlice.js';
 import fetchData from '../thunks/fetchData.js';
 
 const messagesAdapter = createEntityAdapter();
@@ -16,10 +16,12 @@ const messagesSlice = createSlice({
       builder
           .addCase(fetchData.fulfilled, (state, { payload }) => {
               messagesAdapter.addMany(state, payload.messages);
-          });
-          /*.addCase(channelsActions.removeChannel, (state, { payload }) => {
-
-          })*/
+          })
+          .addCase(channelsActions.removeChannel, (state, { payload }) => {
+              const channelIdToRemove = payload;
+              const restEntities = state.entities.filter((entity) => entity.id !== channelIdToRemove);
+              messagesAdapter.setAll(state, restEntities);
+          })
     },
 });
 

@@ -20,7 +20,7 @@ const RegistrationPage = () => {
     const [regIsFailed, setRegIsFailed] = useState(false);
     const navigate = useNavigate();
     const inputRef = useRef();
-    const auth = useAuth();
+    const { logIn } = useAuth();
 
     useEffect(() => {
         inputRef.current.focus();
@@ -55,7 +55,7 @@ const RegistrationPage = () => {
                 const response = await axios.post(
                     routes.registrationPath(),
                     { username: values.username, password: values.password });
-                auth.logIn(response.data);
+                logIn(response.data);
                 navigate(routes.chatPagePath());
             } catch (err) {
                 if (!err.isAxiosError) {

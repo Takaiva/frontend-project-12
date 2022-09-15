@@ -12,7 +12,7 @@ import routes from '../routes.js';
 
 const LoginPage = () => {
     const [authIsFailed, setAuthIsFailed] = useState(false);
-    const auth = useAuth();
+    const { logIn } = useAuth();
     const navigate = useNavigate();
     const inputRef = useRef();
 
@@ -34,7 +34,7 @@ const LoginPage = () => {
         onSubmit: async (values) => {
             try {
                 const response = await axios.post(routes.loginPath(), values);
-                auth.logIn(response.data);
+                logIn(response.data);
                 setAuthIsFailed(false);
                 toast.success('Logged in successfully');
                 navigate(routes.chatPagePath());

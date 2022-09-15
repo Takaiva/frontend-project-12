@@ -4,6 +4,7 @@ import React from "react";
 export const RegistrationInputField = ({ formik, label, name, inputRef = null, regIsFailed, ...props }) => {
 
     const isInvalid = (formik.touched[name] && formik.errors[name]) || regIsFailed;
+    const isConflict = name === 'confirmPassword' ? "User already exists" : null;
     return (
         <FloatingLabel label={label} controlId={name} className="mb-3">
             <Form.Control
@@ -20,7 +21,7 @@ export const RegistrationInputField = ({ formik, label, name, inputRef = null, r
                 required
             />
             <Form.Control.Feedback type="invalid">
-                {formik.errors[name] ? formik.errors[name] : null}
+                {formik.errors[name] ? formik.errors[name] : isConflict}
             </Form.Control.Feedback>
         </FloatingLabel>
     );

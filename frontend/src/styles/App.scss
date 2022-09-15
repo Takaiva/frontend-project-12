@@ -1,4 +1,5 @@
 $gradient-font-color: linear-gradient(to right, darkorange, #81d02f, darkorange, #ee4c4c);
+$gradient-font-color-reversed: linear-gradient(to right, #ee4c4c, darkorange, #81d02f, darkorange);
 
 .atures-font {
   font-family: "AturesBold";
@@ -11,6 +12,22 @@ $gradient-font-color: linear-gradient(to right, darkorange, #81d02f, darkorange,
   background-position: 100%;
   transition: background-position 275ms ease;
   background-image: $gradient-font-color;
+  &:hover {
+    background-position: 0 100%;
+    color: transparent;
+  }
+}
+
+.logout {
+  font-size: 2rem;
+  line-height: 2rem;
+
+  color: darkorange;
+  -webkit-background-clip: text;
+  background-size: 150% 100%;
+  background-position: 100%;
+  transition: background-position 275ms ease;
+  background-image: $gradient-font-color-reversed;
   &:hover {
     background-position: 0 100%;
     color: transparent;

@@ -142,8 +142,9 @@ const PrivateOutlet = () => {
 
 const PageNotFound = () => {
     return (
-        <div>
-            <h2>404 - Not Found</h2>
+        <div className="text-center pt-5">
+            <h2>It seems you are lost</h2>
+            {"You'd better "}
             <Link to="/">Go Home</Link>
         </div>
     );

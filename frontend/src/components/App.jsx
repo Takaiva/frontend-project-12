@@ -3,7 +3,7 @@ import './../styles/index.scss';
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { actions as chatActions } from "../slices/messagesSlice.js";
-//import { actions as channelsActions } from "../slices/channelsSlice.js";
+import { actions as channelsActions } from "../slices/channelsSlice.js";
 import { io } from 'socket.io-client';
 
 import {
@@ -21,9 +21,10 @@ import Navbar from "./Navbar.jsx";
 import LoginPage from "./LoginPage.jsx";
 import RegistrationPage from "./RegistrationPage.jsx";
 import ChatPage from "./ChatPage.jsx";
+import ModalWindow from "./modalComponents/ModalWindow.jsx";
 
-import { AuthContext, ApiContext } from "../contexts/index.js";
-import { useAuth } from "../hooks/index.js";
+import { AuthContext, ApiContext } from "../contexts";
+import { useAuth } from "../hooks";
 import routes from '../routes.js';
 
 const ChatApiProvider = ({ children }) => {
@@ -34,6 +35,18 @@ const ChatApiProvider = ({ children }) => {
        socket.on('newMessage', (message) => {
            dispatch(chatActions.addMessage(message));
        });
+       socket.on('newChannel', (channel) => {
+           dispatch(channelsActions.addChannel(channel));
+       });
+       socket.on('renameChannel', (channel) => {
+           dispatch(channelsActions.renameChannel({
+               id: channel.id,
+               changes: { name: channel.name },
+           }));
+       });
+       socket.on('removeChannel', ({ id }) => {
+           dispatch(channelsActions.removeChannel(id));
+       })
     }, [socket, dispatch]);
 
     const sendMessage = (message, handleResponse) => {
@@ -42,10 +55,31 @@ const ChatApiProvider = ({ children }) => {
         });
     };
 
+    const addChannel = (data, handleResponse) => {
+        socket.emit('newChannel', data, (response) => {
+            handleResponse(response);
+        });
+    };
+
+    const renameChannel = (data, handleResponse) => {
+        socket.emit('renameChannel', data, (response) => {
+            handleResponse(response);
+        });
+    };
+
+    const removeChannel = (id, handleResponse) => {
+        socket.emit('removeChannel', id, (response) => {
+            handleResponse(response);
+        });
+    };
+
     return (
         <ApiContext.Provider
             value={{
-                sendMessage
+                sendMessage,
+                addChannel,
+                renameChannel,
+                removeChannel,
             }}
         >
             {children}
@@ -130,6 +164,7 @@ const App = () => {
                             </Route>
                             <Route path="*" element={<PageNotFound />} />
                         </Routes>
+                        <ModalWindow />
                     </div>
                     <ToastContainer
                         position="top-right"

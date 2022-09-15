@@ -38,7 +38,7 @@ const RegistrationPage = () => {
                 .trim()
                 .required('Username is required')
                 .min(3, 'Username must be at least 3 characters')
-                .max(20, 'Username must be 20 characters or less'),
+                .max(20, 'Username must be at most 20 characters'),
             password: yup
                 .string()
                 .trim()

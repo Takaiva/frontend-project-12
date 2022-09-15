@@ -1,39 +1,80 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import {
     //useDispatch,
     useSelector
 } from "react-redux";
 import {
-    //actions as channelsActions,
+    actions as channelsActions,
     selectors,
 } from "../slices/channelsSlice.js";
 import {
-    //Button,
-    //ButtonGroup,
+    ButtonGroup,
     Nav,
     Col,
-    //Dropdown,
+    Dropdown,
 } from "react-bootstrap";
 
-const Channel = (props) => {
-    const { channel, currentChannelId } = props.data;
+import { actions as modalActions } from "../slices/modalSlice.js";
 
-    return (
+const Channel = (props) => {
+    const dispatch = useDispatch();
+    const { channel, currentChannelId } = props.data;
+    const isActiveChannel = channel.id === currentChannelId ? 'activeChannel' : '';
+
+    const notRemovableChannel = (
         <Nav.Item as="li" className="w-100">
             <button
                 id="channel"
-                className={`w-100 text-start mt-1 pb-2 pt-2 bg-white ${channel.id === currentChannelId ? 'activeChannel' : ''}`}
+                className={`btn w-100 text-start text-truncate mt-1 pb-2 pt-2 bg-white ${isActiveChannel}`}
                 type="button"
+                onClick={() => dispatch(channelsActions.changeChannel(channel.id))}
             >
                 <span className="me-1">#</span>
                 {channel.name}
             </button>
         </Nav.Item>
     );
+
+    const removableChannel = (
+        <Nav.Item as="li" className="w-100">
+            <Dropdown as={ButtonGroup} className={`d-flex mt-1 ${isActiveChannel}`} id="channel">
+                <button
+                    type="button"
+                    className={`w-100 btn border-0 text-start pb-2 pt-2 bg-white text-truncate bg-transparent`}
+                    onClick={() => dispatch(channelsActions.changeChannel(channel.id))}
+                >
+                    <span className="me-1">#</span>
+                    {channel.name}
+                </button>
+                <Dropdown.Toggle className="flex-grow-0 dropdown-toggle-split" aria-expanded="false">
+                    <span className="visually-hidden">Edit</span>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => dispatch(modalActions.openModalWindow({
+                        type: 'renameChannel',
+                        item: channel,
+                    }))}
+                    >
+                        Rename
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => dispatch(modalActions.openModalWindow({
+                        type: 'removeChannel',
+                        item: channel,
+                    }))}
+                    >
+                        Remove
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        </Nav.Item>
+    );
+
+    return channel.removable ? removableChannel : notRemovableChannel;
 }
 
 const Channels = () => {
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const channels = useSelector(selectors.selectAll);
     const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
@@ -45,15 +86,15 @@ const Channels = () => {
             style={{ "borderRadius": "8px 0px 0px 34px", "border": "1px solid white"}}
         >
             <div
-                className="d-flex flex-wrap justify-content-between align-items-center mb-2 ps-xxl-4 ps-xl-3 pb-3 pe-2 shadow-sm"
-                //style={{ 'borderBottom': "2px solid orange"}}
+                className="d-flex flex-wrap mb-2 ps-xxl-4 ps-xl-3 pb-3 pe-2 shadow-sm align-items-center justify-content-between"
             >
                 <span style={{ "fontSize": "1.8rem" }}>Channels</span>
                 <button
                     className="p-0 add-channel bg-light"
                     style={{ "width": "2.2rem" }}
                     type="button"
-                    >
+                    onClick={() => dispatch(modalActions.openModalWindow({ type: 'addingChannel', item: null }))}
+                >
                     +
                 </button>
             </div>

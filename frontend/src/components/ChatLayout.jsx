@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector} from "react-redux";
 import { toast } from "react-toastify";
 import { Col, InputGroup, Form,
     //Button,
@@ -35,11 +35,11 @@ const ChatHeader = () => {
     );
 };
 
-const Message = ({ username, body }) => {
+const Message = ({ username, message }) => {
     return (
       <div className="text-break mb-2">
           <b>{username}</b>
-          {`: ${body}`}
+          {`: ${message}`}
       </div>
     );
 };
@@ -62,7 +62,7 @@ const ChatBody = () => {
     return (
         <div id="messages-box" className="chat-messages overflow-auto px-5" ref={scrollRef}>
             {currentChannelMessages && currentChannelMessages.map((message) => (
-                <Message username={message.username} body={message.body} key={message.id} />
+                <Message username={message.username} message={message.body} key={message.id} />
             ))}
         </div>
     );
@@ -122,7 +122,7 @@ const ChatInputField = () => {
                   />
                   <button
                       type="submit"
-                      id='sendMessage'
+                      id="sendMessageButton"
                       className="btn btn-group-vertical"
                       disabled={message === ''}
                   >

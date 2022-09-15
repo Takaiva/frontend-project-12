@@ -34,7 +34,7 @@ nav {
 }
 
 .invalid-feedback {
-  background-color: rgba(220,53,69,.9);
+  background-color: rgba(220, 53, 69, 0.9);
   border-radius: 0.25rem;
   color: #fff;
   font-size: .875rem;
@@ -64,30 +64,86 @@ nav {
 }
 
 #channel {
-  font-size: 1.2em;
+  font-size: 1.2rem;
+  color: black;
 
   border: 2px solid rgba(238, 133, 76, 0.65);
   border-radius: 5px 10px 5px 10px;
-  color: black;
 }
 
 .add-channel {
   font-size: 1.2rem;
   font-weight: normal;
-
   color: black;
+
+  border: 1px solid black;
+  border-radius: 5px;
+
   &:hover {
     background: linear-gradient(45deg, rgba(255, 98, 0, 0.61), rgba(239, 219, 7, 0.87));
     background-size: 400% 450%;
   }
-  border: 1px solid black;
-  border-radius: 5px;
 }
 
-#sendMessage:disabled {
+#sendMessageButton {
+  border: 1px solid transparent;
+}
+
+.dropdown {
+  border: 1px solid transparent;
+}
+
+.dropdown-toggle {
+  color: black;
+
+  &:hover {
+    color: deeppink;
+  }
+  &:focus {
+    color: deeppink;
+  }
+}
+
+.btn {
+  font-size: 1.2rem;
+
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.modal-btn-submit {
+  background: rgba(4, 218, 246, 0.56);
+  border: 1px solid dodgerblue;
+
+  &:hover {
+    background: rgba(4, 218, 246, 0.96);
+  }
+}
+
+.modal-btn-cancel {
+  background: rgba(255, 20, 83, 0.56);
+  border: 1px solid red;
+
+  &:hover {
+    background: rgba(255, 20, 83, 0.8);
+  }
+}
+
+.modal-content {
+  border: 1px solid black;
+  border-radius: 10px 5px 10px 5px;
+}
+
+.btn-primary {
+  background: transparent;
   border: none;
-  opacity: 0.60;
-  outline: none;
+
+  &:hover {
+    background: transparent;
+  }
+  &:enabled {
+    background: transparent;
+  }
 }
 
 .activeChannel {
@@ -107,6 +163,12 @@ nav {
     100% {
       background-position: 0% 50%;
     }
+  }
+}
+
+.Toastify__toast {
+  .Toastify__toast-body {
+    color: black;
   }
 }
 

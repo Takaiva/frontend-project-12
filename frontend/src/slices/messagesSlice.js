@@ -19,7 +19,8 @@ const messagesSlice = createSlice({
           })
           .addCase(channelsActions.removeChannel, (state, { payload }) => {
               const channelIdToRemove = payload;
-              const restEntities = state.entities.filter((entity) => entity.id !== channelIdToRemove);
+              const entities = Object.values(state.entities);
+              const restEntities = entities.filter((entity) => entity.channelId !== channelIdToRemove);
               messagesAdapter.setAll(state, restEntities);
           })
     },

@@ -10,6 +10,7 @@ import { selectors as messagesSelectors } from "../slices/messagesSlice.js";
 
 import { useAuth, useApi } from '../hooks/index.js';
 
+import filter from 'leo-profanity';
 
 const ChatHeader = () => {
     const { t } = useTranslation();
@@ -74,7 +75,7 @@ const ChatInputField = () => {
     const username = getUserName();
     const { sendMessage } = useApi();
     const messageData = {
-        body: message,
+        body: filter.clean(message),
         username,
         channelId,
     };

@@ -8,6 +8,8 @@ import store from './slices/store.js';
 import App from './components/App.jsx';
 import resources from './locales/index.js';
 
+import filter from 'leo-profanity';
+
 export default async () => {
     const i18n = i18next.createInstance();
 
@@ -17,6 +19,9 @@ export default async () => {
             resources,
             fallbackLng: 'ru',
         });
+
+    filter.add(filter.getDictionary('en'));
+    filter.add(filter.getDictionary('ru'));
 
     return (
         <I18nextProvider i18n={i18n}>

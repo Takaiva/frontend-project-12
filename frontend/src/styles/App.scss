@@ -189,3 +189,15 @@ nav {
   }
 }
 
+.dropdown-item {
+  -webkit-background-clip: text;
+  background-size: 150% 100%;
+  background-position: 100%;
+  transition: background-position 275ms ease;
+  background-image: $gradient-font-color-reversed;
+  &:hover {
+    background-position: 0 100%;
+    color: transparent;
+  }
+}
+

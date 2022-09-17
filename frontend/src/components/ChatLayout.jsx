@@ -1,19 +1,18 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useTranslation } from "react-i18next";
 import { useSelector} from "react-redux";
 import { toast } from "react-toastify";
-import { Col, InputGroup, Form,
-    //Button,
-} from 'react-bootstrap';
-import {
-    selectors as channelsSelectors,
-} from "../slices/channelsSlice.js";
-import {
-    selectors as messagesSelectors,
-} from "../slices/messagesSlice.js";
+
+import { Col, InputGroup, Form } from 'react-bootstrap';
+
+import { selectors as channelsSelectors } from "../slices/channelsSlice.js";
+import { selectors as messagesSelectors } from "../slices/messagesSlice.js";
+
 import { useAuth, useApi } from '../hooks/index.js';
 
 
 const ChatHeader = () => {
+    const { t } = useTranslation();
     const currentChannelId = useSelector((state) => state.channels.currentChannelId);
     const channels = useSelector(channelsSelectors.selectAll);
     const currentChannel = channels.find((channel) => channel.id === currentChannelId);
@@ -30,7 +29,7 @@ const ChatHeader = () => {
                     {currentChannel ? currentChannel.name : null}
                 </b>
             </p>
-            <span className="text-muted">{`Overall messages: ${currentChannelMessages.length}`}</span>
+            <span className="text-muted">{t('chat.messagesCount', {count: currentChannelMessages.length})}</span>
         </div>
     );
 };
@@ -49,8 +48,6 @@ const ChatBody = () => {
     const currentChannelId = useSelector((state) => state.channels.currentChannelId);
     const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
     const scrollRef = useRef();
-    console.log(messages);
-    console.log(currentChannelId);
 
     useEffect(() => {
         scrollRef.current.scrollTo({
@@ -69,6 +66,7 @@ const ChatBody = () => {
 };
 
 const ChatInputField = () => {
+    const { t } = useTranslation();
     const [message, setMessage] = useState('');
     const channelId = useSelector((state) => state.channels.currentChannelId);
     const inputRef = useRef();
@@ -89,7 +87,7 @@ const ChatInputField = () => {
         if (response.status === 'ok') {
             setMessage('');
         } else {
-            toast.error('Connection error');
+            toast.error(t('errors.network'));
         }
     }
 
@@ -114,7 +112,7 @@ const ChatInputField = () => {
                   <Form.Control
                       name="body"
                       aria-label="New message"
-                      placeholder="type in a message"
+                      placeholder={t('chat.typeInPlaceholder')}
                       className="border-0 p-0 ps-2 bg-light"
                       ref={inputRef}
                       value={message}
@@ -129,7 +127,7 @@ const ChatInputField = () => {
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
                           <path fillRule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
                       </svg>
-                      <span className="visually-hidden">Send</span>
+                      <span className="visually-hidden">{t('chat.sendMessageButton')}</span>
                   </button>
               </InputGroup>
           </Form>

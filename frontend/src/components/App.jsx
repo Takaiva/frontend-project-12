@@ -2,29 +2,32 @@ import './../styles/App.scss';
 import './../styles/index.scss';
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { actions as chatActions } from "../slices/messagesSlice.js";
-import { actions as channelsActions } from "../slices/channelsSlice.js";
 import { io } from 'socket.io-client';
 
 import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link,
     Navigate,
     Outlet,
 } from "react-router-dom";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./Navbar.jsx";
 import LoginPage from "./LoginPage.jsx";
-import RegistrationPage from "./RegistrationPage.jsx";
+import SignUpPage from "./SignUpPage.jsx";
 import ChatPage from "./ChatPage.jsx";
+import PageNotFound from "./PageNotFound.jsx";
 import ModalWindow from "./modalComponents/ModalWindow.jsx";
 
 import { AuthContext, ApiContext } from "../contexts";
 import { useAuth } from "../hooks";
+
+import { actions as chatActions } from "../slices/messagesSlice.js";
+import { actions as channelsActions } from "../slices/channelsSlice.js";
+
 import routes from '../routes.js';
 
 const ChatApiProvider = ({ children }) => {
@@ -140,16 +143,6 @@ const PrivateOutlet = () => {
     );
 };
 
-const PageNotFound = () => {
-    return (
-        <div className="text-center pt-5">
-            <h2>It seems you are lost</h2>
-            {"You'd better "}
-            <Link to="/">Go Home</Link>
-        </div>
-    );
-};
-
 const App = () => {
     return (
         <AuthProvider>
@@ -158,7 +151,7 @@ const App = () => {
                     <div className="d-flex flex-column h-100" id="fading">
                         <Navbar />
                         <Routes>
-                            <Route path={routes.registrationPagePath()} element={<IsLoggedIn><RegistrationPage /></IsLoggedIn>} />
+                            <Route path={routes.registrationPagePath()} element={<IsLoggedIn><SignUpPage /></IsLoggedIn>} />
                             <Route path={routes.loginPagePath()} element={<IsLoggedIn><LoginPage /></IsLoggedIn>} />
                             <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
                                 <Route path="" element={<ChatPage />} />

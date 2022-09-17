@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { useFormik } from 'formik';
+
 import {
     Button,
     Card,
@@ -9,14 +12,17 @@ import {
     Col,
     Row,
 } from "react-bootstrap";
+
 import * as yup from 'yup';
 import axios from 'axios';
 
-import { RegistrationInputField } from "./RegistrationInputField.jsx";
-import routes from '../routes.js';
 import { useAuth } from "../hooks";
 
-const RegistrationPage = () => {
+import { SignUpInputField } from "./SignUpInputField.jsx";
+import routes from '../routes.js';
+
+const SignUpPage = () => {
+    const { t } = useTranslation();
     const [regIsFailed, setRegIsFailed] = useState(false);
     const navigate = useNavigate();
     const inputRef = useRef();
@@ -36,27 +42,26 @@ const RegistrationPage = () => {
             username: yup
                 .string()
                 .trim()
-                .required('Username is required')
-                .min(3, 'Username must be at least 3 characters')
-                .max(20, 'Username must be at most 20 characters'),
+                .required(t('signup.errors.username'))
+                .min(3, t('signup.errors.usernameMinLength'))
+                .max(20, t('signup.errors.usernameMaxLength')),
             password: yup
                 .string()
                 .trim()
-                .required('Password is required')
-                .min(6, 'Password must be at least 6 characters')
-                .required('Password is required'),
+                .required(t('signup.errors.password'))
+                .min(6, t('signup.errors.passwordMinLength')),
             confirmPassword: yup
                 .string()
-                .test('confirmPassword', 'passwords must match', (value, context) => value === context.parent.password),
+                .test('confirmPassword', t('signup.errors.confirm'), (value, context) => value === context.parent.password),
         }),
         onSubmit: async (values) => {
-
             try {
                 const response = await axios.post(
                     routes.registrationPath(),
                     { username: values.username, password: values.password });
                 logIn(response.data);
                 navigate(routes.chatPagePath());
+                toast.success(t('notifications.authSuccess', { username: response.data.username }));
             } catch (err) {
                 if (!err.isAxiosError) {
                     throw err;
@@ -76,28 +81,28 @@ const RegistrationPage = () => {
                 <Col md="8" xxl="6" className="col-12">
                     <Card className="shadow">
                         <Card.Body className="row p-5">
-                            <h1 className="my-4 text-center">Sign Up</h1>
+                            <h1 className="my-4 text-center">{t('signup.header')}</h1>
                             <Form
                                 onSubmit={formik.handleSubmit}
                                 className="col-12 col-md-0 mt-3 mt-mb-0"
                                 noValidate
                             >
-                                <RegistrationInputField
+                                <SignUpInputField
                                     formik={formik}
-                                    label="Username"
+                                    label={t('signup.username')}
                                     name="username"
                                     inputRef={inputRef}
                                     regIsFailed={regIsFailed}
                                 />
-                                <RegistrationInputField
+                                <SignUpInputField
                                     formik={formik}
-                                    label="Password"
+                                    label={t('signup.password')}
                                     name="password"
                                     type="password"
                                     regIsFailed={regIsFailed} />
-                                <RegistrationInputField
+                                <SignUpInputField
                                     formik={formik}
-                                    label="Confirm password"
+                                    label={t('signup.confirm')}
                                     name="confirmPassword"
                                     type="password"
                                     regIsFailed={regIsFailed} />
@@ -105,9 +110,14 @@ const RegistrationPage = () => {
                                     variant="outline-primary"
                                     type="submit"
                                     className="w-100 mb-3 pb-3 pt-3 shadow-sm"
-                                    style={{ "borderRadius": "15px", "lineHeight": "1rem", "fontSize": "1.5rem" }}
+                                    style={{
+                                        "borderRadius": "15px",
+                                        "lineHeight": "1rem",
+                                        "fontSize": "1.5rem",
+                                        "border": "1.5px solid",
+                                    }}
                                 >
-                                    Submit
+                                    {t('signup.submitButton')}
                                 </Button>
                             </Form>
                         </Card.Body>
@@ -120,4 +130,4 @@ const RegistrationPage = () => {
     );
 };
 
-export default RegistrationPage;
+export default SignUpPage;

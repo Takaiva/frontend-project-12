@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { toast } from 'react-toastify';
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -12,6 +13,7 @@ import { actions as modalActions } from "../../slices/modalSlice";
 import { useApi } from "../../hooks";
 
 const RenameChannel = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [isDisabled, setDisabled] = useState(false);
     const { renameChannel } = useApi();
@@ -26,10 +28,10 @@ const RenameChannel = () => {
 
     const handleResponse = (response) => {
         if (response.status === 'ok') {
-            toast.success('Channel successfully updated');
+            toast.success(t('notifications.updateChannelSuccess'));
             dispatch(modalActions.closeModalWindow());
         } else {
-            toast.error('Connection error');
+            toast.error(t('errors.network'));
         }
     };
 
@@ -39,10 +41,10 @@ const RenameChannel = () => {
         },
         validationSchema: yup.object({
             name: yup.string()
-                .required('Name is required')
-                .notOneOf(channelsNames, 'channelAlreadyExists')
-                .min(3, "Channel's name must be at least 3 characters")
-                .max(20, "Channel's name must be at most 20 characters")
+                .required(t('modals.errors.required'))
+                .notOneOf(channelsNames, t('modals.errors.alreadyExists'))
+                .min(3, t('modals.errors.minLength'))
+                .max(20, t('modals.errors.maxLength')),
         }),
         onSubmit: () => {
             setDisabled(true);
@@ -58,13 +60,13 @@ const RenameChannel = () => {
         <Modal show animation={true} centered onHide={() => dispatch(modalActions.closeModalWindow())}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Rename channel
+                    {t('modals.renameChannelHeader')}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body >
                 <Form onSubmit={formik.handleSubmit}>
                     <Form.Group className="mb-3">
-                        <FloatingLabel label="New channel's name" controlId="name">
+                        <FloatingLabel label={t('modals.renameChannelPlaceholder')} controlId="name">
                             <Form.Control
                                 ref={inputRef}
                                 placeholder={channelBeingEdited.name}
@@ -84,14 +86,14 @@ const RenameChannel = () => {
                             onClick={() => dispatch(modalActions.closeModalWindow())}
                             className="me-3 btn modal-btn-cancel"
                         >
-                            Cancel
+                            {t('modals.cancelButton')}
                         </button>
                         <button
                             type="submit"
                             disabled={isDisabled}
                             className="btn modal-btn-submit"
                         >
-                            Submit
+                            {t('modals.submitButton')}
                         </button>
                     </div>
                 </Form>

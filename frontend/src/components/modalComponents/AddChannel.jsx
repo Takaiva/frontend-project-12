@@ -1,15 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { toast } from 'react-toastify';
 import { useFormik } from "formik";
 import * as yup from 'yup';
 
-import {
-    //Button,
-    Form,
-    Modal,
-    FloatingLabel,
-} from "react-bootstrap";
+import { Form, Modal, FloatingLabel } from "react-bootstrap";
 
 import { selectors as channelsSelectors, actions as channelsActions } from '../../slices/channelsSlice.js';
 import { actions as modalActions } from '../../slices/modalSlice.js';
@@ -17,6 +13,7 @@ import { actions as modalActions } from '../../slices/modalSlice.js';
 import { useApi } from "../../hooks";
 
 const AddChannel = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [isDisabled, setDisabled] = useState(false);
     const { addChannel } = useApi();
@@ -32,9 +29,9 @@ const AddChannel = () => {
         if (response.status === 'ok') {
             dispatch(channelsActions.changeChannel(response.data.id));
             dispatch(modalActions.closeModalWindow());
-            toast.success('Channel successfully added');
+            toast.success(t('notifications.addChannelSuccess'));
         } else {
-            toast.error('Connection error');
+            toast.error(t('errors.network'));
         }
     };
 
@@ -44,10 +41,10 @@ const AddChannel = () => {
         },
         validationSchema: yup.object({
             name: yup.string()
-                .required('Name is required')
-                .notOneOf(channelsNames, 'channelAlreadyExists')
-                .min(3, "Channel's name must be at least 3 characters")
-                .max(20, "Channel's name must be at most 20 characters")
+                .required(t('modals.errors.required'))
+                .notOneOf(channelsNames, t('modals.errors.alreadyExists'))
+                .min(3, t('modals.errors.minLength'))
+                .max(20, t('modals.errors.maxLength')),
         }),
         onSubmit: () => {
             setDisabled(true);
@@ -60,16 +57,16 @@ const AddChannel = () => {
         <Modal show animation={true} centered onHide={() => dispatch(modalActions.closeModalWindow())}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Add channel
+                    {t('modals.addChannelHeader')}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body >
                 <Form onSubmit={formik.handleSubmit}>
                     <Form.Group className="mb-3">
-                        <FloatingLabel label="Channel's name" controlId="name">
+                        <FloatingLabel label={t('modals.addChannelPlaceholder')} controlId="name">
                             <Form.Control
                                 ref={inputRef}
-                                placeholder="Channel's name"
+                                placeholder={t('modals.addChannelPlaceholder')}
                                 name="name"
                                 value={formik.values.name}
                                 onChange={formik.handleChange}
@@ -86,14 +83,14 @@ const AddChannel = () => {
                             onClick={() => dispatch(modalActions.closeModalWindow())}
                             className="me-3 btn modal-btn-cancel"
                         >
-                            Cancel
+                            {t('modals.cancelButton')}
                         </button>
                         <button
                             type="submit"
                             disabled={isDisabled}
                             className="btn modal-btn-submit"
                         >
-                            Submit
+                            {t('modals.submitButton')}
                         </button>
                     </div>
                 </Form>

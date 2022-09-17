@@ -1,23 +1,15 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import {
-    //useDispatch,
-    useSelector
-} from "react-redux";
-import {
-    actions as channelsActions,
-    selectors,
-} from "../slices/channelsSlice.js";
-import {
-    ButtonGroup,
-    Nav,
-    Col,
-    Dropdown,
-} from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
+import { ButtonGroup, Nav, Col, Dropdown } from "react-bootstrap";
+
+import { actions as channelsActions, selectors } from "../slices/channelsSlice.js";
 import { actions as modalActions } from "../slices/modalSlice.js";
 
 const Channel = (props) => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { channel, currentChannelId } = props.data;
     const isActiveChannel = channel.id === currentChannelId ? 'activeChannel' : '';
@@ -48,7 +40,7 @@ const Channel = (props) => {
                     {channel.name}
                 </button>
                 <Dropdown.Toggle className="flex-grow-0 dropdown-toggle-split" aria-expanded="false">
-                    <span className="visually-hidden">Edit</span>
+                    <span className="visually-hidden">{t('chat.editChannel')}</span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={() => dispatch(modalActions.openModalWindow({
@@ -56,14 +48,14 @@ const Channel = (props) => {
                         item: channel,
                     }))}
                     >
-                        Rename
+                        {t('chat.renameChannelItem')}
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => dispatch(modalActions.openModalWindow({
                         type: 'removeChannel',
                         item: channel,
                     }))}
                     >
-                        Remove
+                        {t('chat.removeChannelItem')}
                     </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
@@ -74,6 +66,7 @@ const Channel = (props) => {
 }
 
 const Channels = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const channels = useSelector(selectors.selectAll);
     const currentChannelId = useSelector((state) => state.channels.currentChannelId);
@@ -88,7 +81,7 @@ const Channels = () => {
             <div
                 className="d-flex flex-wrap mb-2 ps-xxl-4 ps-xl-3 pb-3 pe-2 shadow-sm align-items-center justify-content-between"
             >
-                <span style={{ "fontSize": "1.8rem" }}>Channels</span>
+                <span style={{ "fontSize": "1.8rem" }}>{t('chat.channels')}</span>
                 <button
                     className="p-0 add-channel bg-light"
                     style={{ "width": "2.2rem" }}

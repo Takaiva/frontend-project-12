@@ -90,14 +90,17 @@ nav {
 
 .add-channel {
   font-size: 1.2rem;
-  font-weight: normal;
+
   color: black;
+
+  background: linear-gradient(45deg, rgba(255, 98, 0, 0.61), rgba(239, 219, 7, 0.87));
+  background-size: 400% 450%;
 
   border: 1px solid black;
   border-radius: 5px;
 
   &:hover {
-    background: linear-gradient(45deg, rgba(255, 98, 0, 0.61), rgba(239, 219, 7, 0.87));
+    background: linear-gradient(45deg, rgba(255, 98, 0, 0.98), rgb(239, 219, 7));
     background-size: 400% 450%;
   }
 }

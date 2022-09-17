@@ -3,12 +3,22 @@ import i18next from 'i18next';
 import { I18nextProvider, initReactI18next} from "react-i18next";
 
 import { Provider as StoreProvider } from 'react-redux';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import store from './slices/store.js';
 
 import App from './components/App.jsx';
 import resources from './locales/index.js';
 
 import filter from 'leo-profanity';
+
+const rollbarConfig = {
+    accessToke: 'POST_CLIENT_ITEM_ACCESS_TOKEN',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+    payload: {
+        environment: "production"
+    },
+};
 
 export default async () => {
     const i18n = i18next.createInstance();
@@ -24,10 +34,14 @@ export default async () => {
     filter.add(filter.getDictionary('ru'));
 
     return (
-        <I18nextProvider i18n={i18n}>
-            <StoreProvider store={store}>
-                <App />
-            </StoreProvider>
-        </I18nextProvider>
+        <RollbarProvider config={rollbarConfig}>
+            <ErrorBoundary>
+                <I18nextProvider i18n={i18n}>
+                    <StoreProvider store={store}>
+                        <App />
+                    </StoreProvider>
+                </I18nextProvider>
+            </ErrorBoundary>
+        </RollbarProvider>
     );
 };

@@ -64,14 +64,17 @@ const SignUpPage = () => {
                 toast.success(t('notifications.authSuccess', { username: response.data.username }));
             } catch (err) {
                 if (!err.isAxiosError) {
+                    toast.error(t('errors.unknown'));
                     throw err;
                 }
                 if (err.response.status === 409) {
                     setRegIsFailed(true);
                     inputRef.current.select();
                     return;
+                } else {
+                    toast.error(t('errors.network'));
+                    throw err;
                 }
-                throw err;
             }
         },
     })

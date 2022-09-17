@@ -45,14 +45,15 @@ const LoginPage = () => {
                 toast.success(t('notifications.authSuccess', { username: response.data.username }));
             } catch (err) {
                 if (!err.isAxiosError) {
-                    toast.error(t('errors.network'));
+                    toast.error(t('errors.unknown'));
                     return;
                 }
                 if (err.response?.status === 401) {
                     setAuthIsFailed(true);
                     inputRef.current.select();
                 } else {
-                    toast.error(t('errors.unknown'));
+                    toast.error(t('errors.network'));
+                    throw err;
                 }
             }
 

@@ -1,10 +1,12 @@
 import { Form, FloatingLabel } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import React from "react";
 
 export const SignUpInputField = ({ formik, label, name, inputRef = null, regIsFailed, ...props }) => {
+    const { t } = useTranslation();
 
     const isInvalid = (formik.touched[name] && formik.errors[name]) || regIsFailed;
-    const isConflict = name === 'confirmPassword' ? "User already exists" : null;
+    const isConflict = name === 'confirmPassword' ? t('signup.errors.alreadyExists') : null;
     return (
         <FloatingLabel label={label} controlId={name} className="mb-3">
             <Form.Control

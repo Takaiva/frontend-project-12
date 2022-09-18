@@ -1,13 +1,16 @@
 import { Form, FloatingLabel } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import React from "react";
 
 export const LoginInputField = ({ formik, label, name, inputRef = null, authIsFailed, ...props }) => {
-
+    const { t } = useTranslation();
     const isInvalid = (formik.touched[name] && formik.errors[name]) || authIsFailed;
+
     const authRejected = name === 'password' ?
-        <Form.Control.Feedback type="invalid">There is no such account</Form.Control.Feedback> : null;
+        <Form.Control.Feedback type="invalid">{t('login.errors.authFailed')}</Form.Control.Feedback> : null;
     const feedback = formik.errors[name] ?
         <Form.Control.Feedback type="invalid">{formik.errors[name]}</Form.Control.Feedback> : authRejected;
+
     return (
         <FloatingLabel label={label} controlId={name} className="mb-3">
             <Form.Control

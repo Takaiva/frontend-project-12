@@ -37,7 +37,8 @@ export default {
             editChannel: 'Редактировать канал',
             sendMessageButton: 'Отправить сообщение',
             messagesCount: 'Количество сообщений: {{count}}',
-            typeInPlaceholder: 'Введите сообщение...',
+            newMessagePlaceholder: 'Введите сообщение...',
+            newMessageAriaLabel: 'Новое сообщение',
         },
         notFound: {
             header: 'Страница не найдена',

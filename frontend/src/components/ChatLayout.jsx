@@ -112,8 +112,8 @@ const ChatInputField = () => {
               <InputGroup className="has-validation">
                   <Form.Control
                       name="body"
-                      aria-label="New message"
-                      placeholder={t('chat.typeInPlaceholder')}
+                      aria-label={t('chat.newMessageAriaLabel')}
+                      placeholder={t('chat.newMessagePlaceholder')}
                       className="border-0 p-0 ps-2 bg-light"
                       ref={inputRef}
                       value={message}

@@ -37,7 +37,8 @@ export default {
             editChannel: 'Edit the channel',
             sendMessageButton: 'Send the message',
             messagesCount: 'Overall messages: {{count}}',
-            typeInPlaceholder: 'Type in a message...',
+            newMessagePlaceholder: 'Type in a message...',
+            newMessageAriaLabel: 'New message',
         },
         notFound: {
             header: 'It seems you are lost',

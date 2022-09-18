@@ -46,7 +46,7 @@ const LoginPage = () => {
             } catch (err) {
                 if (!err.isAxiosError) {
                     toast.error(t('errors.unknown'));
-                    return;
+                    throw err;
                 }
                 if (err.response?.status === 401) {
                     setAuthIsFailed(true);

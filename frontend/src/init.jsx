@@ -11,16 +11,16 @@ import resources from './locales/index.js';
 
 import filter from 'leo-profanity';
 
-const rollbarConfig = {
-    accessToke: 'POST_CLIENT_ITEM_ACCESS_TOKEN',
-    captureUncaught: true,
-    captureUnhandledRejections: true,
-    payload: {
-        environment: "production"
-    },
-};
-
 export default async () => {
+    const rollbarConfig = {
+        accessToken: '205a6900e36e4f069ed2bb140b9bec25',
+        captureUncaught: true,
+        captureUnhandledRejections: true,
+        payload: {
+            environment: "production"
+        },
+    };
+
     const i18n = i18next.createInstance();
 
     await i18n

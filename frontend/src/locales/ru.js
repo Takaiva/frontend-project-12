@@ -1,7 +1,7 @@
 export default {
     translation: {
         login: {
-            username: 'Имя пользователя',
+            username: 'Ваш ник',
             password: 'Пароль',
             submitButton: 'Войти',
             signup: 'Регистрация',
@@ -22,10 +22,10 @@ export default {
             header: 'Регистрация',
             errors: {
                 username: 'Обязательное поле',
-                usernameMinLength: 'Имя не должно быть короче 3 символов',
-                usernameMaxLength: 'Имя не должно быть длиннее 20 символов',
+                usernameMinLength: 'От 3 до 20 символов',
+                usernameMaxLength: 'От 3 до 20 символов',
                 password: 'Обязательное поле',
-                passwordMinLength: 'Пароль не должен быть короче 6 символов',
+                passwordMinLength: 'Не менее 6 символов',
                 confirm: 'Пароли должны совпадать',
                 alreadyExists: 'Такой пользователь уже существует',
             }
@@ -50,9 +50,9 @@ export default {
         },
         notifications: {
             authSuccess: 'Рады видеть тебя, {{username}}!',
-            addChannelSuccess: 'Канал успешно добавлен!',
-            updateChannelSuccess: 'Канал успешно обновлен!',
-            removeChannelSuccess: 'Канал успешно удалён!',
+            addChannelSuccess: 'Канал создан',
+            updateChannelSuccess: 'Канал переименован',
+            removeChannelSuccess: 'Канал удалён',
         },
         modals: {
             addChannelHeader: 'Добавить канал',

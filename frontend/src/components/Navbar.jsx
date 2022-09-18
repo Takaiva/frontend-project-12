@@ -14,7 +14,7 @@ const NavbarLayout = () => {
         <Navbar bg="dark" expand="lg" className="shadow-sm">
             <Container>
                <Navbar.Brand href={routes.chatPagePath()} className="atures-font">
-                   Station301
+                   Hexlet Chat
                </Navbar.Brand>
                 { user ? <button type="button" className="btn logout" onClick={logOut}>{t('logout')}</button> : null }
             </Container>

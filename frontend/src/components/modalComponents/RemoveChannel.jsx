@@ -51,7 +51,7 @@ const RemoveChannel = () => {
                         <button
                             type="submit"
                             disabled={isDisabled}
-                            className="btn modal-btn-submit"
+                            className="btn modal-btn-submit btn-danger"
                             onClick={handleRemoveChannel}
                         >
                             {t('modals.removeChannelButton')}

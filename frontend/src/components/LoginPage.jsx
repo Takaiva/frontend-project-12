@@ -51,6 +51,7 @@ const LoginPage = () => {
                 if (err.response?.status === 401) {
                     setAuthIsFailed(true);
                     inputRef.current.select();
+                    return;
                 } else {
                     toast.error(t('errors.network'));
                     throw err;

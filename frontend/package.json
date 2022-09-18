@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "eslint-plugin-react": "^7.31.8",
     "formik": "^2.2.9",
     "i18next": "^21.9.1",
     "leo-profanity": "^1.6.1",

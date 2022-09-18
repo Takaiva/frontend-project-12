@@ -6,24 +6,14 @@ import './styles/index.scss';
 
 import init from './init.jsx';
 
-const app =  async () => {
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    const vdom = await init();
-    root.render(
+const app = async () => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  const vdom = await init();
+  root.render(
         <React.StrictMode>
                 {vdom}
-        </React.StrictMode>
-    )
+        </React.StrictMode>,
+  );
 };
 
 app();
-
-/*const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-     <StoreProvider store={store}>
-         <App />
-     </StoreProvider>
-  </React.StrictMode>
-);*/
-

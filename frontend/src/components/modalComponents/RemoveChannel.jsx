@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
-import { Modal } from "react-bootstrap";
+import { Modal } from 'react-bootstrap';
 
-import { actions as modalActions } from "../../slices/modalSlice";
-import { useApi } from "../../hooks";
+import { actions as modalActions } from '../../slices/modalSlice';
+import { useApi } from '../../hooks';
 
 const RemoveChannel = () => {
   const { t } = useTranslation();

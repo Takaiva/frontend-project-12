@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { Col, InputGroup, Form } from 'react-bootstrap';
 
 import filter from 'leo-profanity';
-import { selectors as channelsSelectors } from "../slices/channelsSlice.js";
-import { selectors as messagesSelectors } from "../slices/messagesSlice.js";
+import { selectors as channelsSelectors } from '../slices/channelsSlice.js';
+import { selectors as messagesSelectors } from '../slices/messagesSlice.js';
 
 import { useAuth, useApi } from '../hooks/index.js';
 
@@ -21,7 +21,7 @@ const ChatHeader = () => {
   return (
         <div
             className="bg-light mb-4 p-3 pb-3 shadow-sm small"
-            style={{ borderRadius: "0px 30px 0px 0px", borderTop: "1px solid white" }}
+            style={{ borderRadius: '0px 30px 0px 0px', borderTop: '1px solid white' }}
         >
             <p className="mb-0">
                 <b>
@@ -102,7 +102,7 @@ const ChatInputField = () => {
       <div className="mt-auto px-5 py-3" >
           <Form
               className="py-1 rounded-2"
-              style={{ border: "1px solid rgba(112, 110, 110, 0.4)" }}
+              style={{ border: '1px solid rgba(112, 110, 110, 0.4)' }}
               noValidate
               onSubmit={handleSendMessage}
           >
@@ -138,11 +138,11 @@ const ChatLayout = () => (
           <div
               className="d-flex flex-column h-100 bg-light"
               style={{
-                borderRadius: "0px 32px 8px 0px",
-                borderTop: "1px solid white",
-                borderBottom: "1px solid white",
-                borderRight: "1px solid white",
-                borderLeft: "0px solid orange",
+                borderRadius: '0px 32px 8px 0px',
+                borderTop: '1px solid white',
+                borderBottom: '1px solid white',
+                borderRight: '1px solid white',
+                borderLeft: '0px solid orange',
               }}
           >
               <ChatHeader />

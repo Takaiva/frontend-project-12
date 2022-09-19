@@ -1,6 +1,6 @@
-import { Form, FloatingLabel } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import React from "react";
+import { Form, FloatingLabel } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const SignUpInputField = ({
   formik, label, name, inputRef = null, regIsFailed, ...props
@@ -21,7 +21,7 @@ const SignUpInputField = ({
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 isInvalid={isInvalid}
-                style={{ borderRadius: "5px 15px 5px 15px" }}
+                style={{ borderRadius: '5px 15px 5px 15px' }}
                 required
             />
             <Form.Control.Feedback type="invalid">

@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import {
   ButtonGroup, Nav, Col, Dropdown,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
-import { actions as channelsActions, selectors } from "../slices/channelsSlice.js";
-import { actions as modalActions } from "../slices/modalSlice.js";
+import { actions as channelsActions, selectors } from '../slices/channelsSlice.js';
+import { actions as modalActions } from '../slices/modalSlice.js';
 
 const Channel = (props) => {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ const Channel = (props) => {
             <Dropdown as={ButtonGroup} className={`d-flex mt-1 ${isActiveChannel}`} id="channel">
                 <button
                     type="button"
-                    className={`w-100 btn border-0 text-start pb-2 pt-2 bg-white text-truncate bg-transparent`}
+                    className={'w-100 btn border-0 text-start pb-2 pt-2 bg-white text-truncate bg-transparent'}
                     onClick={() => dispatch(channelsActions.changeChannel(channel.id))}
                 >
                     <span className="me-1">#</span>
@@ -77,15 +77,15 @@ const Channels = () => {
             xs={4}
             md={2}
             className="border-end pt-3 px-0 bg-light"
-            style={{ borderRadius: "8px 0px 0px 34px", border: "1px solid white" }}
+            style={{ borderRadius: '8px 0px 0px 34px', border: '1px solid white' }}
         >
             <div
                 className="d-flex flex-wrap mb-2 ps-xxl-4 ps-xl-3 pb-3 pe-2 shadow-sm align-items-center justify-content-between"
             >
-                <span style={{ fontSize: "1.8rem" }}>{t('chat.channels')}</span>
+                <span style={{ fontSize: '1.8rem' }}>{t('chat.channels')}</span>
                 <button
                     className="p-0 add-channel bg-light"
-                    style={{ width: "2.2rem" }}
+                    style={{ width: '2.2rem' }}
                     type="button"
                     onClick={() => dispatch(modalActions.openModalWindow({ type: 'addingChannel', item: null }))}
                 >

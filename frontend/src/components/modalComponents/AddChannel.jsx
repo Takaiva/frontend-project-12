@@ -1,16 +1,16 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import React, { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import { Form, Modal, FloatingLabel } from "react-bootstrap";
+import { Form, Modal, FloatingLabel } from 'react-bootstrap';
 
 import { selectors as channelsSelectors, actions as channelsActions } from '../../slices/channelsSlice.js';
 import { actions as modalActions } from '../../slices/modalSlice.js';
 
-import { useApi } from "../../hooks";
+import { useApi } from '../../hooks';
 
 const AddChannel = () => {
   const { t } = useTranslation();

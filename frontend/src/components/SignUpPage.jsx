@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 
@@ -11,14 +11,14 @@ import {
   Container,
   Col,
   Row,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
 import * as yup from 'yup';
 import axios from 'axios';
 
-import { useAuth } from "../hooks";
+import { useAuth } from '../hooks';
 
-import SignUpInputField from "./SignUpInputField.jsx";
+import SignUpInputField from './SignUpInputField.jsx';
 import routes from '../routes.js';
 
 const SignUpPage = () => {
@@ -114,10 +114,10 @@ const SignUpPage = () => {
                                     type="submit"
                                     className="w-100 mb-3 pb-3 pt-3 shadow-sm"
                                     style={{
-                                      borderRadius: "15px",
-                                      lineHeight: "1rem",
-                                      fontSize: "1.5rem",
-                                      border: "1.5px solid",
+                                      borderRadius: '15px',
+                                      lineHeight: '1rem',
+                                      fontSize: '1.5rem',
+                                      border: '1.5px solid',
                                     }}
                                 >
                                     {t('signup.submitButton')}

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container } from 'react-bootstrap';
 
-import { useAuth } from "../hooks";
+import { useAuth } from '../hooks';
 import routes from '../routes.js';
 
 const NavbarLayout = () => {

@@ -1,7 +1,7 @@
-import "../styles/App.scss";
-import "../styles/index.scss";
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import '../styles/App.scss';
+import '../styles/index.scss';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
 
 import {
@@ -10,23 +10,23 @@ import {
   Route,
   Navigate,
   Outlet,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import Navbar from "./Navbar.jsx";
-import LoginPage from "./LoginPage.jsx";
-import SignUpPage from "./SignUpPage.jsx";
-import ChatPage from "./ChatPage.jsx";
-import PageNotFound from "./PageNotFound.jsx";
-import ModalWindow from "./modalComponents/ModalWindow.jsx";
+import Navbar from './Navbar.jsx';
+import LoginPage from './LoginPage.jsx';
+import SignUpPage from './SignUpPage.jsx';
+import ChatPage from './ChatPage.jsx';
+import PageNotFound from './PageNotFound.jsx';
+import ModalWindow from './modalComponents/ModalWindow.jsx';
 
-import { AuthContext, ApiContext } from "../contexts";
-import { useAuth } from "../hooks";
+import { AuthContext, ApiContext } from '../contexts';
+import { useAuth } from '../hooks';
 
-import { actions as chatActions } from "../slices/messagesSlice.js";
-import { actions as channelsActions } from "../slices/channelsSlice.js";
+import { actions as chatActions } from '../slices/messagesSlice.js';
+import { actions as channelsActions } from '../slices/channelsSlice.js';
 
 import routes from '../routes.js';
 

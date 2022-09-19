@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 
 import {
   Button, Card, Form, Row, Col, Container,
-} from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+} from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 import * as yup from 'yup';
 import axios from 'axios';
 
-import { useAuth } from "../hooks";
+import { useAuth } from '../hooks';
 import routes from '../routes.js';
 
-import LoginInputField from "./LoginInputField.jsx";
+import LoginInputField from './LoginInputField.jsx';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -90,17 +90,17 @@ const LoginPage = () => {
                                     type="submit"
                                     className="w-100 mb-3 mt-4 pb-3 pt-3 shadow-sm"
                                     style={{
-                                      borderRadius: "15px",
-                                      lineHeight: "1rem",
-                                      fontSize: "1.5rem",
-                                      border: "1.5px solid",
+                                      borderRadius: '15px',
+                                      lineHeight: '1rem',
+                                      fontSize: '1.5rem',
+                                      border: '1.5px solid',
                                     }}
                                 >
                                     {t('login.submitButton')}
                                 </Button>
                             </Form>
                         </Card.Body>
-                        <Card.Footer className="p-4" style={{ borderRadius: "0px 0px 10px 25px" }}>
+                        <Card.Footer className="p-4" style={{ borderRadius: '0px 0px 10px 25px' }}>
                             <div className="text-center">
                                 <span>{t('login.newToChat')}</span>
                                 <Link to={routes.registrationPagePath()}>{t('login.signup')}</Link>

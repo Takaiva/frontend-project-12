@@ -1,6 +1,6 @@
-import { Form, FloatingLabel } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import React from "react";
+import { Form, FloatingLabel } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const LoginInputField = ({
   formik, label, name, inputRef = null, authIsFailed, ...props
@@ -25,7 +25,7 @@ const LoginInputField = ({
                 value={formik.values[name]}
                 onChange={formik.handleChange}
                 isInvalid={isInvalid}
-                style={{ borderRadius: "5px 15px 5px 15px" }}
+                style={{ borderRadius: '5px 15px 5px 15px' }}
                 required
             />
             {feedback}

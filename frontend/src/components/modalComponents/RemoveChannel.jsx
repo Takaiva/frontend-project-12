@@ -8,7 +8,7 @@ import { Modal } from 'react-bootstrap';
 import { actions as modalActions } from '../../slices/modalSlice';
 import { useApi } from '../../hooks';
 
-const RemoveChannel = () => {
+function RemoveChannel() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [isDisabled, setDisabled] = useState(false);
@@ -33,38 +33,43 @@ const RemoveChannel = () => {
 
   return (
       <Modal
-          show
-          animation={true}
+          animation
           centered
           onHide={() => dispatch(modalActions.closeModalWindow())}
+          show
       >
           <Modal.Header closeButton>
               <Modal.Title>
                   {t('modals.removeChannelHeader')}
               </Modal.Title>
           </Modal.Header>
+
           <Modal.Body >
-              <p className="lead">{t('modals.removeChannelBody')}</p>
+              <p className="lead">
+                  {t('modals.removeChannelBody')}
+              </p>
+
               <div className="d-flex justify-content-end">
                   <button
-                            type="button"
-                            className="me-3 btn modal-btn-cancel"
-                            onClick={() => dispatch(modalActions.closeModalWindow())}
-                        >
+                      className="me-3 btn modal-btn-cancel"
+                      onClick={() => dispatch(modalActions.closeModalWindow())}
+                      type="button"
+                  >
                       {t('modals.cancelButton')}
                   </button>
+
                   <button
-                            type="submit"
-                            disabled={isDisabled}
-                            className="btn modal-btn-submit btn-danger"
-                            onClick={handleRemoveChannel}
-                        >
+                      className="btn modal-btn-submit btn-danger"
+                      disabled={isDisabled}
+                      onClick={handleRemoveChannel}
+                      type="submit"
+                  >
                       {t('modals.removeChannelButton')}
                   </button>
               </div>
           </Modal.Body>
       </Modal>
   );
-};
+}
 
 export default RemoveChannel;

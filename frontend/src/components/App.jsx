@@ -30,7 +30,7 @@ import { actions as channelsActions } from '../slices/channelsSlice.js';
 
 import routes from '../routes.js';
 
-const ChatApiProvider = ({ children }) => {
+function ChatApiProvider({ children }) {
   const socket = io();
   const dispatch = useDispatch();
 
@@ -77,20 +77,20 @@ const ChatApiProvider = ({ children }) => {
   };
 
   return (
-    <ApiContext.Provider
-        value={{
-          sendMessage,
-          addChannel,
-          renameChannel,
-          removeChannel,
-        }}
-    >
-        {children}
-    </ApiContext.Provider>
+      <ApiContext.Provider
+          value={{
+            sendMessage,
+            addChannel,
+            renameChannel,
+            removeChannel,
+          }}
+      >
+          {children}
+      </ApiContext.Provider>
   );
-};
+}
 
-const AuthProvider = ({ children }) => {
+function AuthProvider({ children }) {
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
 
@@ -115,70 +115,92 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
-        value={{
-          logIn,
-          logOut,
-          getAuthHeader,
-          getUserName,
-          user,
-        }}
-    >
-        {children}
-    </AuthContext.Provider>
+      <AuthContext.Provider
+          value={{
+            logIn,
+            logOut,
+            getAuthHeader,
+            getUserName,
+            user,
+          }}
+      >
+          {children}
+      </AuthContext.Provider>
   );
-};
+}
 
-const IsLoggedIn = ({ children }) => {
+function IsLoggedIn({ children }) {
   const { user } = useAuth();
   return (
     user ? <Navigate to={routes.chatPagePath()} /> : children
   );
-};
+}
 
-const PrivateOutlet = () => {
+function PrivateOutlet() {
   const { user } = useAuth();
   return (
     user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />
   );
-};
+}
 
-const App = () => (
-  <AuthProvider>
+function App() {
+  return (<AuthProvider>
       <ChatApiProvider>
           <Router>
-              <div className="d-flex flex-column h-100" id="fading">
+              <div
+                  className="d-flex flex-column h-100"
+                  id="fading"
+              >
                   <Navbar />
+
                   <Routes>
                       <Route
+                          element={<IsLoggedIn>
+                              <SignUpPage />
+                          </IsLoggedIn>}
                           path={routes.registrationPagePath()}
-                          element={<IsLoggedIn><SignUpPage /></IsLoggedIn>}
                       />
+
                       <Route
+                          element={<IsLoggedIn>
+                              <LoginPage />
+                          </IsLoggedIn>}
                           path={routes.loginPagePath()}
-                          element={<IsLoggedIn><LoginPage /></IsLoggedIn>}
                       />
-                      <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
-                          <Route path="" element={<ChatPage />} />
+
+                      <Route
+                          element={<PrivateOutlet />}
+                          path={routes.chatPagePath()}
+                      >
+                          <Route
+                              element={<ChatPage />}
+                              path=""
+                          />
                       </Route>
-                      <Route path="*" element={<PageNotFound />} />
+
+                      <Route
+                          element={<PageNotFound />}
+                          path="*"
+                      />
                   </Routes>
+
                   <ModalWindow />
               </div>
+
               <ToastContainer
-                  position="top-right"
                   autoClose={5000}
+                  closeOnClick
+                  draggable
                   hideProgressBar={false}
                   newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
                   pauseOnFocusLoss
-                  draggable
                   pauseOnHover
+                  position="top-right"
+                  rtl={false}
               />
           </Router>
       </ChatApiProvider>
-  </AuthProvider>
-);
+  </AuthProvider>);
+}
 
 export default App;

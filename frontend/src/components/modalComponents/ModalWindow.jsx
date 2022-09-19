@@ -10,7 +10,7 @@ const modals = {
   renameChannel: RenameChannel,
 };
 
-const ModalWindow = () => {
+function ModalWindow() {
   const modalType = useSelector((state) => state.modal.type);
   const Modal = modals[modalType];
   if (!Modal) {
@@ -19,6 +19,6 @@ const ModalWindow = () => {
   return (
       <Modal />
   );
-};
+}
 
 export default ModalWindow;

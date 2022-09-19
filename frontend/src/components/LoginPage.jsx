@@ -16,7 +16,7 @@ import routes from '../routes.js';
 
 import LoginInputField from './LoginInputField.jsx';
 
-const LoginPage = () => {
+function LoginPage() {
   const { t } = useTranslation();
   const [authIsFailed, setAuthIsFailed] = useState(false);
   const { logIn } = useAuth();
@@ -61,49 +61,71 @@ const LoginPage = () => {
     },
   });
   return (
-      <Container fluid className="h-100" id="wallpaper">
+      <Container
+          className="h-100"
+          fluid
+          id="wallpaper"
+      >
           <Row className="h-100 justify-content-center align-content-center">
-              <Col md="8" xxl="6" className="col-12">
+              <Col
+                  className="col-12"
+                  md="8"
+                  xxl="6"
+              >
                   <Card className="shadow">
                       <Card.Body className="row p-5">
-                          <h1 className="mb-4 text-center">{t('login.header')}</h1>
+                          <h1 className="mb-4 text-center">
+                              {t('login.header')}
+                          </h1>
+
                           <Form
-                                onSubmit={formik.handleSubmit}
-                                className="col-12 col-md-0 mt-3 mt-mb-0"
-                                noValidate
-                            >
+                              className="col-12 col-md-0 mt-3 mt-mb-0"
+                              noValidate
+                              onSubmit={formik.handleSubmit}
+                          >
                               <LoginInputField
-                                    formik={formik}
-                                    label={t('login.username')}
-                                    name="username"
-                                    inputRef={inputRef}
-                                    authIsFailed={authIsFailed}
-                                />
+                                  authIsFailed={authIsFailed}
+                                  formik={formik}
+                                  inputRef={inputRef}
+                                  label={t('login.username')}
+                                  name="username"
+                              />
+
                               <LoginInputField
-                                    formik={formik}
-                                    label={t('login.password')}
-                                    name="password"
-                                    authIsFailed={authIsFailed}
-                                />
+                                  authIsFailed={authIsFailed}
+                                  formik={formik}
+                                  label={t('login.password')}
+                                  name="password"
+                              />
+
                               <Button
-                                    variant="outline-primary"
-                                    type="submit"
-                                    className="w-100 mb-3 mt-4 pb-3 pt-3 shadow-sm"
-                                    style={{
-                                      borderRadius: '15px',
-                                      lineHeight: '1rem',
-                                      fontSize: '1.5rem',
-                                      border: '1.5px solid',
-                                    }}
-                                >
+                                  className="w-100 mb-3 mt-4 pb-3 pt-3 shadow-sm"
+                                  style={{
+                                    borderRadius: '15px',
+                                    lineHeight: '1rem',
+                                    fontSize: '1.5rem',
+                                    border: '1.5px solid',
+                                  }}
+                                  type="submit"
+                                  variant="outline-primary"
+                              >
                                   {t('login.submitButton')}
                               </Button>
                           </Form>
                       </Card.Body>
-                      <Card.Footer className="p-4" style={{ borderRadius: '0px 0px 10px 25px' }}>
+
+                      <Card.Footer
+                          className="p-4"
+                          style={{ borderRadius: '0px 0px 10px 25px' }}
+                      >
                           <div className="text-center">
-                              <span>{t('login.newToChat')}</span>
-                              <Link to={routes.registrationPagePath()}>{t('login.signup')}</Link>
+                              <span>
+                                  {t('login.newToChat')}
+                              </span>
+
+                              <Link to={routes.registrationPagePath()}>
+                                  {t('login.signup')}
+                              </Link>
                           </div>
                       </Card.Footer>
                   </Card>
@@ -111,6 +133,6 @@ const LoginPage = () => {
           </Row>
       </Container>
   );
-};
+}
 
 export default LoginPage;

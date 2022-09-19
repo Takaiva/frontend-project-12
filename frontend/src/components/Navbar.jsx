@@ -6,20 +6,34 @@ import { Navbar, Container } from 'react-bootstrap';
 import { useAuth } from '../hooks';
 import routes from '../routes.js';
 
-const NavbarLayout = () => {
+function NavbarLayout() {
   const { t } = useTranslation();
   const { user, logOut } = useAuth();
 
   return (
-      <Navbar bg="dark" expand="lg" className="shadow-sm">
+      <Navbar
+          bg="dark"
+          className="shadow-sm"
+          expand="lg"
+      >
           <Container>
-              <Navbar.Brand href={routes.chatPagePath()} className="atures-font">
+              <Navbar.Brand
+                  className="atures-font"
+                  href={routes.chatPagePath()}
+              >
                   Hexlet Chat
               </Navbar.Brand>
-              { user ? <button type="button" className="btn logout" onClick={logOut}>{t('logout')}</button> : null }
+
+              { user ? <button
+                  className="btn logout"
+                  onClick={logOut}
+                  type="button"
+                       >
+                  {t('logout')}
+              </button> : null }
           </Container>
       </Navbar>
   );
-};
+}
 
 export default NavbarLayout;

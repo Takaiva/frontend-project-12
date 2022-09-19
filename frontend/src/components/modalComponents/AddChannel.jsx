@@ -12,7 +12,7 @@ import { actions as modalActions } from '../../slices/modalSlice.js';
 
 import { useApi } from '../../hooks';
 
-const AddChannel = () => {
+function AddChannel() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [isDisabled, setDisabled] = useState(false);
@@ -55,46 +55,53 @@ const AddChannel = () => {
 
   return (
       <Modal
-          show
-          animation={true}
+          animation
           centered
           onHide={() => dispatch(modalActions.closeModalWindow())}
+          show
       >
           <Modal.Header closeButton>
               <Modal.Title>
                   {t('modals.addChannelHeader')}
               </Modal.Title>
           </Modal.Header>
+
           <Modal.Body >
               <Form onSubmit={formik.handleSubmit}>
                   <Form.Group className="mb-3">
-                      <FloatingLabel label={t('modals.addChannelPlaceholder')} controlId="name">
+                      <FloatingLabel
+                          controlId="name"
+                          label={t('modals.addChannelPlaceholder')}
+                      >
                           <Form.Control
-                                ref={inputRef}
-                                placeholder={t('modals.addChannelPlaceholder')}
-                                name="name"
-                                value={formik.values.name}
-                                onChange={formik.handleChange}
-                                isInvalid={!!formik.errors.name}
-                            />
+                              isInvalid={!!formik.errors.name}
+                              name="name"
+                              onChange={formik.handleChange}
+                              placeholder={t('modals.addChannelPlaceholder')}
+                              ref={inputRef}
+                              value={formik.values.name}
+                          />
+
                           <Form.Control.Feedback type="invalid">
                               {formik.errors.name ? formik.errors.name : null}
                           </Form.Control.Feedback>
                       </FloatingLabel>
                   </Form.Group>
+
                   <div className="d-flex justify-content-end">
                       <button
-                            type="button"
-                            onClick={() => dispatch(modalActions.closeModalWindow())}
-                            className="me-3 btn modal-btn-cancel"
-                        >
+                          className="me-3 btn modal-btn-cancel"
+                          onClick={() => dispatch(modalActions.closeModalWindow())}
+                          type="button"
+                      >
                           {t('modals.cancelButton')}
                       </button>
+
                       <button
-                            type="submit"
-                            disabled={isDisabled}
-                            className="btn modal-btn-submit"
-                        >
+                          className="btn modal-btn-submit"
+                          disabled={isDisabled}
+                          type="submit"
+                      >
                           {t('modals.submitButton')}
                       </button>
                   </div>
@@ -102,6 +109,6 @@ const AddChannel = () => {
           </Modal.Body>
       </Modal>
   );
-};
+}
 
 export default AddChannel;

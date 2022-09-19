@@ -1,20 +1,21 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { ButtonGroup, Nav, Col, Dropdown } from "react-bootstrap";
+import {
+  ButtonGroup, Nav, Col, Dropdown,
+} from "react-bootstrap";
 
 import { actions as channelsActions, selectors } from "../slices/channelsSlice.js";
 import { actions as modalActions } from "../slices/modalSlice.js";
 
 const Channel = (props) => {
-    const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const { channel, currentChannelId } = props.data;
-    const isActiveChannel = channel.id === currentChannelId ? 'activeChannel' : '';
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { channel, currentChannelId } = props.data;
+  const isActiveChannel = channel.id === currentChannelId ? 'activeChannel' : '';
 
-    const notRemovableChannel = (
+  const notRemovableChannel = (
         <Nav.Item as="li" className="w-100">
             <button
                 id="channel"
@@ -26,9 +27,9 @@ const Channel = (props) => {
                 {channel.name}
             </button>
         </Nav.Item>
-    );
+  );
 
-    const removableChannel = (
+  const removableChannel = (
         <Nav.Item as="li" className="w-100">
             <Dropdown as={ButtonGroup} className={`d-flex mt-1 ${isActiveChannel}`} id="channel">
                 <button
@@ -44,15 +45,15 @@ const Channel = (props) => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={() => dispatch(modalActions.openModalWindow({
-                        type: 'renameChannel',
-                        item: channel,
+                      type: 'renameChannel',
+                      item: channel,
                     }))}
                     >
                         {t('chat.renameChannelItem')}
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => dispatch(modalActions.openModalWindow({
-                        type: 'removeChannel',
-                        item: channel,
+                      type: 'removeChannel',
+                      item: channel,
                     }))}
                     >
                         {t('chat.removeChannelItem')}
@@ -60,31 +61,31 @@ const Channel = (props) => {
                 </Dropdown.Menu>
             </Dropdown>
         </Nav.Item>
-    );
+  );
 
-    return channel.removable ? removableChannel : notRemovableChannel;
-}
+  return channel.removable ? removableChannel : notRemovableChannel;
+};
 
 const Channels = () => {
-    const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const channels = useSelector(selectors.selectAll);
-    const currentChannelId = useSelector((state) => state.channels.currentChannelId);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const channels = useSelector(selectors.selectAll);
+  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
-    return (
+  return (
         <Col
             xs={4}
             md={2}
             className="border-end pt-3 px-0 bg-light"
-            style={{ "borderRadius": "8px 0px 0px 34px", "border": "1px solid white"}}
+            style={{ borderRadius: "8px 0px 0px 34px", border: "1px solid white" }}
         >
             <div
                 className="d-flex flex-wrap mb-2 ps-xxl-4 ps-xl-3 pb-3 pe-2 shadow-sm align-items-center justify-content-between"
             >
-                <span style={{ "fontSize": "1.8rem" }}>{t('chat.channels')}</span>
+                <span style={{ fontSize: "1.8rem" }}>{t('chat.channels')}</span>
                 <button
                     className="p-0 add-channel bg-light"
-                    style={{ "width": "2.2rem" }}
+                    style={{ width: "2.2rem" }}
                     type="button"
                     onClick={() => dispatch(modalActions.openModalWindow({ type: 'addingChannel', item: null }))}
                 >
@@ -94,12 +95,12 @@ const Channels = () => {
             <div>
             <Nav as="ul" fill variant="pills" className="px-2">
                 {channels.map((channel) => (
-                    <Channel data={{channel, currentChannelId}} key={channel.id} />
+                    <Channel data={{ channel, currentChannelId }} key={channel.id} />
                 ))}
             </Nav>
             </div>
         </Col>
-    );
+  );
 };
 
 export default Channels;

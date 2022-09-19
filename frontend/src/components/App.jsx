@@ -1,15 +1,15 @@
-import './../styles/App.scss';
-import './../styles/index.scss';
+import "../styles/App.scss";
+import "../styles/index.scss";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { io } from 'socket.io-client';
 
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Navigate,
-    Outlet,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
 } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
@@ -31,120 +31,119 @@ import { actions as channelsActions } from "../slices/channelsSlice.js";
 import routes from '../routes.js';
 
 const ChatApiProvider = ({ children }) => {
-    const socket = io();
-    const dispatch = useDispatch();
+  const socket = io();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-       socket.on('newMessage', (message) => {
-           dispatch(chatActions.addMessage(message));
-       });
-       socket.on('newChannel', (channel) => {
-           dispatch(channelsActions.addChannel(channel));
-       });
-       socket.on('renameChannel', (channel) => {
-           dispatch(channelsActions.renameChannel({
-               id: channel.id,
-               changes: { name: channel.name },
-           }));
-       });
-       socket.on('removeChannel', ({ id }) => {
-           dispatch(channelsActions.removeChannel(id));
-       })
-    }, [socket, dispatch]);
+  useEffect(() => {
+    socket.on('newMessage', (message) => {
+      dispatch(chatActions.addMessage(message));
+    });
+    socket.on('newChannel', (channel) => {
+      dispatch(channelsActions.addChannel(channel));
+    });
+    socket.on('renameChannel', (channel) => {
+      dispatch(channelsActions.renameChannel({
+        id: channel.id,
+        changes: { name: channel.name },
+      }));
+    });
+    socket.on('removeChannel', ({ id }) => {
+      dispatch(channelsActions.removeChannel(id));
+    });
+  }, [socket, dispatch]);
 
-    const sendMessage = (message, handleResponse) => {
-        socket.emit('newMessage', message, (response) => {
-            handleResponse(response);
-        });
-    };
+  const sendMessage = (message, handleResponse) => {
+    socket.emit('newMessage', message, (response) => {
+      handleResponse(response);
+    });
+  };
 
-    const addChannel = (data, handleResponse) => {
-        socket.emit('newChannel', data, (response) => {
-            handleResponse(response);
-        });
-    };
+  const addChannel = (data, handleResponse) => {
+    socket.emit('newChannel', data, (response) => {
+      handleResponse(response);
+    });
+  };
 
-    const renameChannel = (data, handleResponse) => {
-        socket.emit('renameChannel', data, (response) => {
-            handleResponse(response);
-        });
-    };
+  const renameChannel = (data, handleResponse) => {
+    socket.emit('renameChannel', data, (response) => {
+      handleResponse(response);
+    });
+  };
 
-    const removeChannel = (id, handleResponse) => {
-        socket.emit('removeChannel', id, (response) => {
-            handleResponse(response);
-        });
-    };
+  const removeChannel = (id, handleResponse) => {
+    socket.emit('removeChannel', id, (response) => {
+      handleResponse(response);
+    });
+  };
 
-    return (
+  return (
         <ApiContext.Provider
             value={{
-                sendMessage,
-                addChannel,
-                renameChannel,
-                removeChannel,
+              sendMessage,
+              addChannel,
+              renameChannel,
+              removeChannel,
             }}
         >
             {children}
         </ApiContext.Provider>
-    );
+  );
 };
 
 const AuthProvider = ({ children }) => {
-    const currentUser = JSON.parse(localStorage.getItem('user'));
-    const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
 
-    const getUserName = () => {
-        const { username } = JSON.parse(localStorage.getItem('user'));
-        return username;
-    }
+  const getUserName = () => {
+    const { username } = JSON.parse(localStorage.getItem('user'));
+    return username;
+  };
 
-    const logIn = (userData) => {
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser({ username: userData.username });
-    };
+  const logIn = (userData) => {
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser({ username: userData.username });
+  };
 
-    const logOut = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-    }
+  const logOut = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
 
-    const getAuthHeader = () => {
-        const userData = JSON.parse(localStorage.getItem('user'));
-        return userData?.token ? { Authorization: `Bearer ${userData.token}` } : {};
-    }
+  const getAuthHeader = () => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    return userData?.token ? { Authorization: `Bearer ${userData.token}` } : {};
+  };
 
-    return (
+  return (
         <AuthContext.Provider
             value={{
-                logIn,
-                logOut,
-                getAuthHeader,
-                getUserName,
-                user,
+              logIn,
+              logOut,
+              getAuthHeader,
+              getUserName,
+              user,
             }}
             >
             {children}
         </AuthContext.Provider>
-    )
+  );
 };
 
 const IsLoggedIn = ({ children }) => {
-    const { user } = useAuth();
-    return (
-        user ? <Navigate to={routes.chatPagePath()} /> : children
-    );
+  const { user } = useAuth();
+  return (
+    user ? <Navigate to={routes.chatPagePath()} /> : children
+  );
 };
 
 const PrivateOutlet = () => {
-    const { user } = useAuth();
-    return (
-        user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />
-    );
+  const { user } = useAuth();
+  return (
+    user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />
+  );
 };
 
-const App = () => {
-    return (
+const App = () => (
         <AuthProvider>
             <ChatApiProvider>
                 <Router>
@@ -174,7 +173,6 @@ const App = () => {
                 </Router>
             </ChatApiProvider>
         </AuthProvider>
-    );
-};
+);
 
 export default App;

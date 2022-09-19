@@ -1,28 +1,27 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { Col, InputGroup, Form } from 'react-bootstrap';
 
+import filter from 'leo-profanity';
 import { selectors as channelsSelectors } from "../slices/channelsSlice.js";
 import { selectors as messagesSelectors } from "../slices/messagesSlice.js";
 
 import { useAuth, useApi } from '../hooks/index.js';
 
-import filter from 'leo-profanity';
-
 const ChatHeader = () => {
-    const { t } = useTranslation();
-    const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-    const channels = useSelector(channelsSelectors.selectAll);
-    const currentChannel = channels.find((channel) => channel.id === currentChannelId);
-    const messages = useSelector(messagesSelectors.selectAll);
-    const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
-    return (
+  const { t } = useTranslation();
+  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
+  const channels = useSelector(channelsSelectors.selectAll);
+  const currentChannel = channels.find((channel) => channel.id === currentChannelId);
+  const messages = useSelector(messagesSelectors.selectAll);
+  const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
+  return (
         <div
             className="bg-light mb-4 p-3 pb-3 shadow-sm small"
-            style={{"borderRadius": "0px 30px 0px 0px", "borderTop": "1px solid white"}}
+            style={{ borderRadius: "0px 30px 0px 0px", borderTop: "1px solid white" }}
         >
             <p className="mb-0">
                 <b>
@@ -30,82 +29,80 @@ const ChatHeader = () => {
                     {currentChannel ? currentChannel.name : null}
                 </b>
             </p>
-            <span className="text-muted">{t('chat.messagesCount', {count: currentChannelMessages.length})}</span>
+            <span className="text-muted">{t('chat.messagesCount', { count: currentChannelMessages.length })}</span>
         </div>
-    );
+  );
 };
 
-const Message = ({ username, message }) => {
-    return (
+const Message = ({ username, message }) => (
       <div className="text-break mb-2">
           <b>{username}</b>
           {`: ${message}`}
       </div>
-    );
-};
+);
 
 const ChatBody = () => {
-    const messages = useSelector(messagesSelectors.selectAll);
-    const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-    const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
-    const scrollRef = useRef();
+  const messages = useSelector(messagesSelectors.selectAll);
+  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
+  const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
+  const scrollRef = useRef();
 
-    useEffect(() => {
-        scrollRef.current.scrollTo({
-            top: 10000,
-            behavior: 'smooth',
-        });
-    }, [currentChannelMessages]);
+  useEffect(() => {
+    scrollRef.current.scrollTo({
+      top: 10000,
+      behavior: 'smooth',
+    });
+  }, [currentChannelMessages]);
 
-    return (
+  return (
         <div id="messages-box" className="chat-messages overflow-auto px-5" ref={scrollRef}>
             {currentChannelMessages && currentChannelMessages.map((message) => (
                 <Message username={message.username} message={message.body} key={message.id} />
             ))}
         </div>
-    );
+  );
 };
 
 const ChatInputField = () => {
-    const { t } = useTranslation();
-    const [message, setMessage] = useState('');
-    const channelId = useSelector((state) => state.channels.currentChannelId);
-    const inputRef = useRef();
-    const { getUserName } = useAuth();
-    const username = getUserName();
-    const { sendMessage } = useApi();
-    const messageData = {
-        body: filter.clean(message),
-        username,
-        channelId,
-    };
+  const { t } = useTranslation();
+  const [message, setMessage] = useState('');
+  const channelId = useSelector((state) => state.channels.currentChannelId);
+  const inputRef = useRef();
+  const { getUserName } = useAuth();
+  const username = getUserName();
+  const { sendMessage } = useApi();
+  const messageData = {
+    body: filter.clean(message),
+    username,
+    channelId,
+  };
 
-    useEffect(() => {
-       inputRef.current.focus();
-    });
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
-    const handleResponse = (response) => {
-        if (response.status === 'ok') {
-            setMessage('');
-        } else {
-            toast.error(t('errors.network'));
-        }
+  const handleResponse = (response) => {
+    if (response.status === 'ok') {
+      setMessage('');
+    } else {
+      toast.error(t('errors.network'));
     }
+  };
 
-    const handleMessage = (event) => {
-        setMessage(event.target.value);
-    };
+  const handleMessage = (event) => {
+    setMessage(event.target.value);
+  };
 
-    const handleSendMessage = (event) => {
-        event.preventDefault();
-        sendMessage(messageData, handleResponse);
-    }
+  const handleSendMessage = (event) => {
+    event.preventDefault();
+    sendMessage(messageData, handleResponse);
+  };
 
   return (
       <div className="mt-auto px-5 py-3" >
           <Form
               className="py-1 rounded-2"
-              style={{ "border": "1px solid rgba(112, 110, 110, 0.4)" }}
+              style={{ border: "1px solid rgba(112, 110, 110, 0.4)" }}
               noValidate
               onSubmit={handleSendMessage}
           >
@@ -136,17 +133,16 @@ const ChatInputField = () => {
   );
 };
 
-const ChatLayout = () => {
-    return (
+const ChatLayout = () => (
       <Col className="p-0 h-100">
           <div
               className="d-flex flex-column h-100 bg-light"
               style={{
-                  "borderRadius": "0px 32px 8px 0px",
-                  "borderTop": "1px solid white",
-                  "borderBottom": "1px solid white",
-                  "borderRight": "1px solid white",
-                  "borderLeft": "0px solid orange"
+                borderRadius: "0px 32px 8px 0px",
+                borderTop: "1px solid white",
+                borderBottom: "1px solid white",
+                borderRight: "1px solid white",
+                borderLeft: "0px solid orange",
               }}
           >
               <ChatHeader />
@@ -154,7 +150,6 @@ const ChatLayout = () => {
               <ChatInputField />
           </div>
       </Col>
-    );
-}
+);
 
 export default ChatLayout;

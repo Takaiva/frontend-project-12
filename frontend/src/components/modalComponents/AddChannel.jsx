@@ -13,47 +13,47 @@ import { actions as modalActions } from '../../slices/modalSlice.js';
 import { useApi } from "../../hooks";
 
 const AddChannel = () => {
-    const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const [isDisabled, setDisabled] = useState(false);
-    const { addChannel } = useApi();
-    const channels = useSelector(channelsSelectors.selectAll);
-    const channelsNames = channels.map(channel => channel.name);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [isDisabled, setDisabled] = useState(false);
+  const { addChannel } = useApi();
+  const channels = useSelector(channelsSelectors.selectAll);
+  const channelsNames = channels.map((channel) => channel.name);
 
-    const inputRef = useRef();
-    useEffect(() => {
-        inputRef.current.focus();
-    }, []);
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
-    const handleResponse = (response) => {
-        if (response.status === 'ok') {
-            dispatch(channelsActions.changeChannel(response.data.id));
-            dispatch(modalActions.closeModalWindow());
-            toast.success(t('notifications.addChannelSuccess'));
-        } else {
-            toast.error(t('errors.network'));
-        }
-    };
+  const handleResponse = (response) => {
+    if (response.status === 'ok') {
+      dispatch(channelsActions.changeChannel(response.data.id));
+      dispatch(modalActions.closeModalWindow());
+      toast.success(t('notifications.addChannelSuccess'));
+    } else {
+      toast.error(t('errors.network'));
+    }
+  };
 
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-        },
-        validationSchema: yup.object({
-            name: yup.string()
-                .required(t('modals.errors.required'))
-                .notOneOf(channelsNames, t('modals.errors.alreadyExists'))
-                .min(3, t('modals.errors.minLength'))
-                .max(20, t('modals.errors.maxLength')),
-        }),
-        onSubmit: () => {
-            setDisabled(true);
-            addChannel(formik.values, handleResponse);
-            setDisabled(false);
-        },
-    });
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+    },
+    validationSchema: yup.object({
+      name: yup.string()
+        .required(t('modals.errors.required'))
+        .notOneOf(channelsNames, t('modals.errors.alreadyExists'))
+        .min(3, t('modals.errors.minLength'))
+        .max(20, t('modals.errors.maxLength')),
+    }),
+    onSubmit: () => {
+      setDisabled(true);
+      addChannel(formik.values, handleResponse);
+      setDisabled(false);
+    },
+  });
 
-    return (
+  return (
         <Modal show animation={true} centered onHide={() => dispatch(modalActions.closeModalWindow())}>
             <Modal.Header closeButton>
                 <Modal.Title>
@@ -96,7 +96,7 @@ const AddChannel = () => {
                 </Form>
             </Modal.Body>
         </Modal>
-    )
+  );
 };
 
 export default AddChannel;

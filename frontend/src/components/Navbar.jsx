@@ -31,7 +31,8 @@ function NavbarLayout() {
             type="button"
           >
             {t('logout')}
-          </button>) : null }
+          </button>
+        ) : null }
       </Container>
     </Navbar>
   );

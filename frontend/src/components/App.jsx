@@ -159,7 +159,8 @@ function App() {
                 element={(
                   <IsLoggedIn>
                     <SignUpPage />
-                  </IsLoggedIn>)}
+                  </IsLoggedIn>
+                )}
                 path={routes.registrationPagePath()}
               />
 
@@ -167,7 +168,8 @@ function App() {
                 element={(
                   <IsLoggedIn>
                     <LoginPage />
-                  </IsLoggedIn>)}
+                  </IsLoggedIn>
+                )}
                 path={routes.loginPagePath()}
               />
 

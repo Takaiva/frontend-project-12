@@ -10,35 +10,35 @@ function LoginInputField({
 
   const authRejected = name === 'password'
     ? (<Form.Control.Feedback type="invalid">
-        {t('login.errors.authFailed')}
-       </Form.Control.Feedback>) : null;
+      {t('login.errors.authFailed')}
+    </Form.Control.Feedback>) : null;
   const feedback = formik.errors[name]
     ? (<Form.Control.Feedback type="invalid">
-        {formik.errors[name]}
-       </Form.Control.Feedback>) : authRejected;
+      {formik.errors[name]}
+    </Form.Control.Feedback>) : authRejected;
 
   return (
-      <FloatingLabel
-          className="mb-3"
-          controlId={name}
-          label={label}
+    <FloatingLabel
+      className="mb-3"
+      controlId={name}
+      label={label}
       >
-          <Form.Control
-              {...props}
-              className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
-              isInvalid={isInvalid}
-              name={name}
-              onChange={formik.handleChange}
-              placeholder={label}
-              ref={inputRef}
-              required
-              style={{ borderRadius: '5px 15px 5px 15px' }}
-              type={name === 'password' ? 'password' : null}
-              value={formik.values[name]}
+      <Form.Control
+        {...props}
+        className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
+        isInvalid={isInvalid}
+        name={name}
+        onChange={formik.handleChange}
+        placeholder={label}
+        ref={inputRef}
+        required
+        style={{ borderRadius: '5px 15px 5px 15px' }}
+        type={name === 'password' ? 'password' : null}
+        value={formik.values[name]}
           />
 
-          {feedback}
-      </FloatingLabel>
+      {feedback}
+    </FloatingLabel>
   );
 }
 

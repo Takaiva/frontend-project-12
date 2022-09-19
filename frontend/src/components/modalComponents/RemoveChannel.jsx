@@ -32,43 +32,43 @@ function RemoveChannel() {
   };
 
   return (
-      <Modal
-          animation
-          centered
-          onHide={() => dispatch(modalActions.closeModalWindow())}
-          show
+    <Modal
+      animation
+      centered
+      onHide={() => dispatch(modalActions.closeModalWindow())}
+      show
       >
-          <Modal.Header closeButton>
-              <Modal.Title>
-                  {t('modals.removeChannelHeader')}
-              </Modal.Title>
-          </Modal.Header>
+      <Modal.Header closeButton>
+        <Modal.Title>
+          {t('modals.removeChannelHeader')}
+        </Modal.Title>
+      </Modal.Header>
 
-          <Modal.Body >
-              <p className="lead">
-                  {t('modals.removeChannelBody')}
-              </p>
+      <Modal.Body >
+        <p className="lead">
+          {t('modals.removeChannelBody')}
+        </p>
 
-              <div className="d-flex justify-content-end">
-                  <button
-                      className="me-3 btn modal-btn-cancel"
-                      onClick={() => dispatch(modalActions.closeModalWindow())}
-                      type="button"
+        <div className="d-flex justify-content-end">
+          <button
+            className="me-3 btn modal-btn-cancel"
+            onClick={() => dispatch(modalActions.closeModalWindow())}
+            type="button"
                   >
-                      {t('modals.cancelButton')}
-                  </button>
+            {t('modals.cancelButton')}
+          </button>
 
-                  <button
-                      className="btn modal-btn-submit btn-danger"
-                      disabled={isDisabled}
-                      onClick={handleRemoveChannel}
-                      type="submit"
+          <button
+            className="btn modal-btn-submit btn-danger"
+            disabled={isDisabled}
+            onClick={handleRemoveChannel}
+            type="submit"
                   >
-                      {t('modals.removeChannelButton')}
-                  </button>
-              </div>
-          </Modal.Body>
-      </Modal>
+            {t('modals.removeChannelButton')}
+          </button>
+        </div>
+      </Modal.Body>
+    </Modal>
   );
 }
 

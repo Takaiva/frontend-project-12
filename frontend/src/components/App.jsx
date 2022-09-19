@@ -77,16 +77,16 @@ function ChatApiProvider({ children }) {
   };
 
   return (
-      <ApiContext.Provider
-          value={{
-            sendMessage,
-            addChannel,
-            renameChannel,
-            removeChannel,
-          }}
+    <ApiContext.Provider
+      value={{
+        sendMessage,
+        addChannel,
+        renameChannel,
+        removeChannel,
+      }}
       >
-          {children}
-      </ApiContext.Provider>
+      {children}
+    </ApiContext.Provider>
   );
 }
 
@@ -115,17 +115,17 @@ function AuthProvider({ children }) {
   };
 
   return (
-      <AuthContext.Provider
-          value={{
-            logIn,
-            logOut,
-            getAuthHeader,
-            getUserName,
-            user,
-          }}
+    <AuthContext.Provider
+      value={{
+        logIn,
+        logOut,
+        getAuthHeader,
+        getUserName,
+        user,
+      }}
       >
-          {children}
-      </AuthContext.Provider>
+      {children}
+    </AuthContext.Provider>
   );
 }
 
@@ -145,61 +145,61 @@ function PrivateOutlet() {
 
 function App() {
   return (<AuthProvider>
-      <ChatApiProvider>
-          <Router>
-              <div
-                  className="d-flex flex-column h-100"
-                  id="fading"
+    <ChatApiProvider>
+      <Router>
+        <div
+          className="d-flex flex-column h-100"
+          id="fading"
               >
-                  <Navbar />
+          <Navbar />
 
-                  <Routes>
-                      <Route
-                          element={<IsLoggedIn>
-                              <SignUpPage />
-                          </IsLoggedIn>}
-                          path={routes.registrationPagePath()}
+          <Routes>
+            <Route
+              element={<IsLoggedIn>
+                <SignUpPage />
+              </IsLoggedIn>}
+              path={routes.registrationPagePath()}
                       />
 
-                      <Route
-                          element={<IsLoggedIn>
-                              <LoginPage />
-                          </IsLoggedIn>}
-                          path={routes.loginPagePath()}
+            <Route
+              element={<IsLoggedIn>
+                <LoginPage />
+              </IsLoggedIn>}
+              path={routes.loginPagePath()}
                       />
 
-                      <Route
-                          element={<PrivateOutlet />}
-                          path={routes.chatPagePath()}
+            <Route
+              element={<PrivateOutlet />}
+              path={routes.chatPagePath()}
                       >
-                          <Route
-                              element={<ChatPage />}
-                              path=""
+              <Route
+                element={<ChatPage />}
+                path=""
                           />
-                      </Route>
+            </Route>
 
-                      <Route
-                          element={<PageNotFound />}
-                          path="*"
+            <Route
+              element={<PageNotFound />}
+              path="*"
                       />
-                  </Routes>
+          </Routes>
 
-                  <ModalWindow />
-              </div>
+          <ModalWindow />
+        </div>
 
-              <ToastContainer
-                  autoClose={5000}
-                  closeOnClick
-                  draggable
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  pauseOnFocusLoss
-                  pauseOnHover
-                  position="top-right"
-                  rtl={false}
+        <ToastContainer
+          autoClose={5000}
+          closeOnClick
+          draggable
+          hideProgressBar={false}
+          newestOnTop={false}
+          pauseOnFocusLoss
+          pauseOnHover
+          position="top-right"
+          rtl={false}
               />
-          </Router>
-      </ChatApiProvider>
+      </Router>
+    </ChatApiProvider>
   </AuthProvider>);
 }
 

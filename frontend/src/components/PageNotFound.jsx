@@ -7,22 +7,22 @@ function PageNotFound() {
   const { t } = useTranslation();
 
   return (
-      <div className="text-center pt-5">
-          <h2 style={{ color: 'orange' }}>
-              {t('notFound.header')}
-          </h2>
+    <div className="text-center pt-5">
+      <h2 style={{ color: 'orange' }}>
+        {t('notFound.header')}
+      </h2>
 
-          <p style={{ color: 'orange' }}>
-              {t('notFound.message')}
+      <p style={{ color: 'orange' }}>
+        {t('notFound.message')}
 
-              <Link
-                  style={{ color: 'dodgerblue' }}
-                  to="/"
+        <Link
+          style={{ color: 'dodgerblue' }}
+          to="/"
               >
-                  {t('notFound.linkText')}
-              </Link>
-          </p>
-      </div>
+          {t('notFound.linkText')}
+        </Link>
+      </p>
+    </div>
   );
 }
 

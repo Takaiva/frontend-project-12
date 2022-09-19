@@ -10,9 +10,9 @@ const app = async () => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
   const vdom = await init();
   root.render(
-      <React.StrictMode>
-          {vdom}
-      </React.StrictMode>,
+    <React.StrictMode>
+      {vdom}
+    </React.StrictMode>,
   );
 };
 

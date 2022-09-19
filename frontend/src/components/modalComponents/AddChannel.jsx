@@ -54,60 +54,60 @@ function AddChannel() {
   });
 
   return (
-      <Modal
-          animation
-          centered
-          onHide={() => dispatch(modalActions.closeModalWindow())}
-          show
+    <Modal
+      animation
+      centered
+      onHide={() => dispatch(modalActions.closeModalWindow())}
+      show
       >
-          <Modal.Header closeButton>
-              <Modal.Title>
-                  {t('modals.addChannelHeader')}
-              </Modal.Title>
-          </Modal.Header>
+      <Modal.Header closeButton>
+        <Modal.Title>
+          {t('modals.addChannelHeader')}
+        </Modal.Title>
+      </Modal.Header>
 
-          <Modal.Body >
-              <Form onSubmit={formik.handleSubmit}>
-                  <Form.Group className="mb-3">
-                      <FloatingLabel
-                          controlId="name"
-                          label={t('modals.addChannelPlaceholder')}
+      <Modal.Body >
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Group className="mb-3">
+            <FloatingLabel
+              controlId="name"
+              label={t('modals.addChannelPlaceholder')}
                       >
-                          <Form.Control
-                              isInvalid={!!formik.errors.name}
-                              name="name"
-                              onChange={formik.handleChange}
-                              placeholder={t('modals.addChannelPlaceholder')}
-                              ref={inputRef}
-                              value={formik.values.name}
+              <Form.Control
+                isInvalid={!!formik.errors.name}
+                name="name"
+                onChange={formik.handleChange}
+                placeholder={t('modals.addChannelPlaceholder')}
+                ref={inputRef}
+                value={formik.values.name}
                           />
 
-                          <Form.Control.Feedback type="invalid">
-                              {formik.errors.name ? formik.errors.name : null}
-                          </Form.Control.Feedback>
-                      </FloatingLabel>
-                  </Form.Group>
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.name ? formik.errors.name : null}
+              </Form.Control.Feedback>
+            </FloatingLabel>
+          </Form.Group>
 
-                  <div className="d-flex justify-content-end">
-                      <button
-                          className="me-3 btn modal-btn-cancel"
-                          onClick={() => dispatch(modalActions.closeModalWindow())}
-                          type="button"
+          <div className="d-flex justify-content-end">
+            <button
+              className="me-3 btn modal-btn-cancel"
+              onClick={() => dispatch(modalActions.closeModalWindow())}
+              type="button"
                       >
-                          {t('modals.cancelButton')}
-                      </button>
+              {t('modals.cancelButton')}
+            </button>
 
-                      <button
-                          className="btn modal-btn-submit"
-                          disabled={isDisabled}
-                          type="submit"
+            <button
+              className="btn modal-btn-submit"
+              disabled={isDisabled}
+              type="submit"
                       >
-                          {t('modals.submitButton')}
-                      </button>
-                  </div>
-              </Form>
-          </Modal.Body>
-      </Modal>
+              {t('modals.submitButton')}
+            </button>
+          </div>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 }
 

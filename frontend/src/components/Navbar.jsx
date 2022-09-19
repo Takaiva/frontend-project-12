@@ -11,28 +11,28 @@ function NavbarLayout() {
   const { user, logOut } = useAuth();
 
   return (
-      <Navbar
-          bg="dark"
-          className="shadow-sm"
-          expand="lg"
+    <Navbar
+      bg="dark"
+      className="shadow-sm"
+      expand="lg"
       >
-          <Container>
-              <Navbar.Brand
-                  className="atures-font"
-                  href={routes.chatPagePath()}
+      <Container>
+        <Navbar.Brand
+          className="atures-font"
+          href={routes.chatPagePath()}
               >
-                  Hexlet Chat
-              </Navbar.Brand>
+          Hexlet Chat
+        </Navbar.Brand>
 
-              { user ? <button
-                  className="btn logout"
-                  onClick={logOut}
-                  type="button"
+        { user ? <button
+          className="btn logout"
+          onClick={logOut}
+          type="button"
                        >
-                  {t('logout')}
-              </button> : null }
-          </Container>
-      </Navbar>
+          {t('logout')}
+        </button> : null }
+      </Container>
+    </Navbar>
   );
 }
 

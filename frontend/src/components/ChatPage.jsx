@@ -16,19 +16,19 @@ function ChatPage() {
   }, [header, dispatch]);
 
   return (
-      <Container
-          className="h-100 my-4 overflow-hidden rounded shadow"
-          id="wallpaper"
+    <Container
+      className="h-100 my-4 overflow-hidden rounded shadow"
+      id="wallpaper"
       >
-          <Row
-              className="h-100 bg-light flex-md-row"
-              style={{ borderRadius: '10px 35px 10px 35px', border: '3px solid #04DAF6' }}
+      <Row
+        className="h-100 bg-light flex-md-row"
+        style={{ borderRadius: '10px 35px 10px 35px', border: '3px solid #04DAF6' }}
           >
-              <Channels />
+        <Channels />
 
-              <ChatLayout />
-          </Row>
-      </Container>
+        <ChatLayout />
+      </Row>
+    </Container>
   );
 }
 

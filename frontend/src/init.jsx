@@ -33,14 +33,14 @@ export default async () => {
   filter.add(filter.getDictionary('ru'));
 
   return (
-      <RollbarProvider config={rollbarConfig}>
-          <ErrorBoundary>
-              <I18nextProvider i18n={i18n}>
-                  <StoreProvider store={store}>
-                      <App />
-                  </StoreProvider>
-              </I18nextProvider>
-          </ErrorBoundary>
-      </RollbarProvider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <I18nextProvider i18n={i18n}>
+          <StoreProvider store={store}>
+            <App />
+          </StoreProvider>
+        </I18nextProvider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };

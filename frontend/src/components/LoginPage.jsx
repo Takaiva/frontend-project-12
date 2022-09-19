@@ -61,31 +61,31 @@ const LoginPage = () => {
     },
   });
   return (
-        <Container fluid className="h-100" id="wallpaper">
-            <Row className="h-100 justify-content-center align-content-center">
-                <Col md="8" xxl="6" className="col-12">
-                    <Card className="shadow">
-                        <Card.Body className="row p-5">
-                            <h1 className="mb-4 text-center">{t('login.header')}</h1>
-                            <Form
+      <Container fluid className="h-100" id="wallpaper">
+          <Row className="h-100 justify-content-center align-content-center">
+              <Col md="8" xxl="6" className="col-12">
+                  <Card className="shadow">
+                      <Card.Body className="row p-5">
+                          <h1 className="mb-4 text-center">{t('login.header')}</h1>
+                          <Form
                                 onSubmit={formik.handleSubmit}
                                 className="col-12 col-md-0 mt-3 mt-mb-0"
                                 noValidate
                             >
-                                <LoginInputField
+                              <LoginInputField
                                     formik={formik}
                                     label={t('login.username')}
                                     name="username"
                                     inputRef={inputRef}
                                     authIsFailed={authIsFailed}
                                 />
-                                <LoginInputField
+                              <LoginInputField
                                     formik={formik}
                                     label={t('login.password')}
                                     name="password"
                                     authIsFailed={authIsFailed}
                                 />
-                                <Button
+                              <Button
                                     variant="outline-primary"
                                     type="submit"
                                     className="w-100 mb-3 mt-4 pb-3 pt-3 shadow-sm"
@@ -96,20 +96,20 @@ const LoginPage = () => {
                                       border: '1.5px solid',
                                     }}
                                 >
-                                    {t('login.submitButton')}
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                        <Card.Footer className="p-4" style={{ borderRadius: '0px 0px 10px 25px' }}>
-                            <div className="text-center">
-                                <span>{t('login.newToChat')}</span>
-                                <Link to={routes.registrationPagePath()}>{t('login.signup')}</Link>
-                            </div>
-                        </Card.Footer>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+                                  {t('login.submitButton')}
+                              </Button>
+                          </Form>
+                      </Card.Body>
+                      <Card.Footer className="p-4" style={{ borderRadius: '0px 0px 10px 25px' }}>
+                          <div className="text-center">
+                              <span>{t('login.newToChat')}</span>
+                              <Link to={routes.registrationPagePath()}>{t('login.signup')}</Link>
+                          </div>
+                      </Card.Footer>
+                  </Card>
+              </Col>
+          </Row>
+      </Container>
   );
 };
 

@@ -32,33 +32,38 @@ const RemoveChannel = () => {
   };
 
   return (
-        <Modal show animation={true} centered onHide={() => dispatch(modalActions.closeModalWindow())}>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    {t('modals.removeChannelHeader')}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body >
-                <p className="lead">{t('modals.removeChannelBody')}</p>
-                    <div className="d-flex justify-content-end">
-                        <button
+      <Modal
+          show
+          animation={true}
+          centered
+          onHide={() => dispatch(modalActions.closeModalWindow())}
+      >
+          <Modal.Header closeButton>
+              <Modal.Title>
+                  {t('modals.removeChannelHeader')}
+              </Modal.Title>
+          </Modal.Header>
+          <Modal.Body >
+              <p className="lead">{t('modals.removeChannelBody')}</p>
+              <div className="d-flex justify-content-end">
+                  <button
                             type="button"
                             className="me-3 btn modal-btn-cancel"
                             onClick={() => dispatch(modalActions.closeModalWindow())}
                         >
-                            {t('modals.cancelButton')}
-                        </button>
-                        <button
+                      {t('modals.cancelButton')}
+                  </button>
+                  <button
                             type="submit"
                             disabled={isDisabled}
                             className="btn modal-btn-submit btn-danger"
                             onClick={handleRemoveChannel}
                         >
-                            {t('modals.removeChannelButton')}
-                        </button>
-                    </div>
-            </Modal.Body>
-        </Modal>
+                      {t('modals.removeChannelButton')}
+                  </button>
+              </div>
+          </Modal.Body>
+      </Modal>
   );
 };
 

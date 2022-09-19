@@ -14,8 +14,8 @@ const LoginInputField = ({
     ? <Form.Control.Feedback type="invalid">{formik.errors[name]}</Form.Control.Feedback> : authRejected;
 
   return (
-        <FloatingLabel label={label} controlId={name} className="mb-3">
-            <Form.Control
+      <FloatingLabel label={label} controlId={name} className="mb-3">
+          <Form.Control
                 {...props}
                 className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
                 type={name === 'password' ? 'password' : null }
@@ -28,8 +28,8 @@ const LoginInputField = ({
                 style={{ borderRadius: '5px 15px 5px 15px' }}
                 required
             />
-            {feedback}
-        </FloatingLabel>
+          {feedback}
+      </FloatingLabel>
   );
 };
 

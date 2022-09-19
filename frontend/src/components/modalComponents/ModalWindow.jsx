@@ -17,7 +17,7 @@ const ModalWindow = () => {
     return null;
   }
   return (
-        <Modal />
+      <Modal />
   );
 };
 

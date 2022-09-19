@@ -57,17 +57,22 @@ const RenameChannel = () => {
   });
 
   return (
-        <Modal show animation={true} centered onHide={() => dispatch(modalActions.closeModalWindow())}>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    {t('modals.renameChannelHeader')}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body >
-                <Form onSubmit={formik.handleSubmit}>
-                    <Form.Group className="mb-3">
-                        <FloatingLabel label={t('modals.renameChannelPlaceholder')} controlId="name">
-                            <Form.Control
+      <Modal
+          show
+          animation={true}
+          centered
+          onHide={() => dispatch(modalActions.closeModalWindow())}
+      >
+          <Modal.Header closeButton>
+              <Modal.Title>
+                  {t('modals.renameChannelHeader')}
+              </Modal.Title>
+          </Modal.Header>
+          <Modal.Body >
+              <Form onSubmit={formik.handleSubmit}>
+                  <Form.Group className="mb-3">
+                      <FloatingLabel label={t('modals.renameChannelPlaceholder')} controlId="name">
+                          <Form.Control
                                 ref={inputRef}
                                 placeholder={channelBeingEdited.name}
                                 name="name"
@@ -75,30 +80,30 @@ const RenameChannel = () => {
                                 onChange={formik.handleChange}
                                 isInvalid={!!formik.errors.name}
                             />
-                            <Form.Control.Feedback type="invalid">
-                                {formik.errors.name ? formik.errors.name : null}
-                            </Form.Control.Feedback>
-                        </FloatingLabel>
-                    </Form.Group>
-                    <div className="d-flex justify-content-end">
-                        <button
+                          <Form.Control.Feedback type="invalid">
+                              {formik.errors.name ? formik.errors.name : null}
+                          </Form.Control.Feedback>
+                      </FloatingLabel>
+                  </Form.Group>
+                  <div className="d-flex justify-content-end">
+                      <button
                             type="button"
                             onClick={() => dispatch(modalActions.closeModalWindow())}
                             className="me-3 btn modal-btn-cancel"
                         >
-                            {t('modals.cancelButton')}
-                        </button>
-                        <button
+                          {t('modals.cancelButton')}
+                      </button>
+                      <button
                             type="submit"
                             disabled={isDisabled}
                             className="btn modal-btn-submit"
                         >
-                            {t('modals.submitButton')}
-                        </button>
-                    </div>
-                </Form>
-            </Modal.Body>
-        </Modal>
+                          {t('modals.submitButton')}
+                      </button>
+                  </div>
+              </Form>
+          </Modal.Body>
+      </Modal>
   );
 };
 

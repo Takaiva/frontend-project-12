@@ -10,12 +10,12 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     openModalWindow: (state, { payload }) => {
-      state.type = payload.type;
-      state.item = payload.item;
+      state.type = payload.type; // eslint-disable-line no-param-reassign
+      state.item = payload.item; // eslint-disable-line no-param-reassign
     },
     closeModalWindow: (state) => {
-      state.type = null;
-      state.item = null;
+      state.type = null; // eslint-disable-line no-param-reassign
+      state.item = null; // eslint-disable-line no-param-reassign
     },
   },
 });

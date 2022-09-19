@@ -79,37 +79,37 @@ const SignUpPage = () => {
     },
   });
   return (
-        <Container fluid className="h-100" id="wallpaper">
-            <Row className="h-100 justify-content-center align-content-center">
-                <Col md="8" xxl="6" className="col-12">
-                    <Card className="shadow">
-                        <Card.Body className="row p-5">
-                            <h1 className="my-4 text-center">{t('signup.header')}</h1>
-                            <Form
+      <Container fluid className="h-100" id="wallpaper">
+          <Row className="h-100 justify-content-center align-content-center">
+              <Col md="8" xxl="6" className="col-12">
+                  <Card className="shadow">
+                      <Card.Body className="row p-5">
+                          <h1 className="my-4 text-center">{t('signup.header')}</h1>
+                          <Form
                                 onSubmit={formik.handleSubmit}
                                 className="col-12 col-md-0 mt-3 mt-mb-0"
                                 noValidate
                             >
-                                <SignUpInputField
+                              <SignUpInputField
                                     formik={formik}
                                     label={t('signup.username')}
                                     name="username"
                                     inputRef={inputRef}
                                     regIsFailed={regIsFailed}
                                 />
-                                <SignUpInputField
+                              <SignUpInputField
                                     formik={formik}
                                     label={t('signup.password')}
                                     name="password"
                                     type="password"
                                     regIsFailed={regIsFailed} />
-                                <SignUpInputField
+                              <SignUpInputField
                                     formik={formik}
                                     label={t('signup.confirm')}
                                     name="confirmPassword"
                                     type="password"
                                     regIsFailed={regIsFailed} />
-                                <Button
+                              <Button
                                     variant="outline-primary"
                                     type="submit"
                                     className="w-100 mb-3 pb-3 pt-3 shadow-sm"
@@ -120,15 +120,15 @@ const SignUpPage = () => {
                                       border: '1.5px solid',
                                     }}
                                 >
-                                    {t('signup.submitButton')}
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
+                                  {t('signup.submitButton')}
+                              </Button>
+                          </Form>
+                      </Card.Body>
+                  </Card>
+              </Col>
+          </Row>
 
-        </Container>
+      </Container>
 
   );
 };

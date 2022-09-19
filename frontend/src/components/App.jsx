@@ -77,7 +77,7 @@ const ChatApiProvider = ({ children }) => {
   };
 
   return (
-        <ApiContext.Provider
+      <ApiContext.Provider
             value={{
               sendMessage,
               addChannel,
@@ -85,8 +85,8 @@ const ChatApiProvider = ({ children }) => {
               removeChannel,
             }}
         >
-            {children}
-        </ApiContext.Provider>
+          {children}
+      </ApiContext.Provider>
   );
 };
 
@@ -115,7 +115,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-        <AuthContext.Provider
+      <AuthContext.Provider
             value={{
               logIn,
               logOut,
@@ -124,8 +124,8 @@ const AuthProvider = ({ children }) => {
               user,
             }}
             >
-            {children}
-        </AuthContext.Provider>
+          {children}
+      </AuthContext.Provider>
   );
 };
 
@@ -144,22 +144,28 @@ const PrivateOutlet = () => {
 };
 
 const App = () => (
-        <AuthProvider>
-            <ChatApiProvider>
-                <Router>
-                    <div className="d-flex flex-column h-100" id="fading">
-                        <Navbar />
-                        <Routes>
-                            <Route path={routes.registrationPagePath()} element={<IsLoggedIn><SignUpPage /></IsLoggedIn>} />
-                            <Route path={routes.loginPagePath()} element={<IsLoggedIn><LoginPage /></IsLoggedIn>} />
-                            <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
-                                <Route path="" element={<ChatPage />} />
-                            </Route>
-                            <Route path="*" element={<PageNotFound />} />
-                        </Routes>
-                        <ModalWindow />
-                    </div>
-                    <ToastContainer
+    <AuthProvider>
+        <ChatApiProvider>
+            <Router>
+                <div className="d-flex flex-column h-100" id="fading">
+                    <Navbar />
+                    <Routes>
+                        <Route
+                            path={routes.registrationPagePath()}
+                            element={<IsLoggedIn><SignUpPage /></IsLoggedIn>}
+                        />
+                        <Route
+                            path={routes.loginPagePath()}
+                            element={<IsLoggedIn><LoginPage /></IsLoggedIn>}
+                        />
+                        <Route path={routes.chatPagePath()} element={<PrivateOutlet />} >
+                            <Route path="" element={<ChatPage />} />
+                        </Route>
+                        <Route path="*" element={<PageNotFound />} />
+                    </Routes>
+                    <ModalWindow />
+                </div>
+                <ToastContainer
                         position="top-right"
                         autoClose={5000}
                         hideProgressBar={false}
@@ -170,9 +176,9 @@ const App = () => (
                         draggable
                         pauseOnHover
                     />
-                </Router>
-            </ChatApiProvider>
-        </AuthProvider>
+            </Router>
+        </ChatApiProvider>
+    </AuthProvider>
 );
 
 export default App;

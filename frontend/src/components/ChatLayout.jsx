@@ -19,26 +19,26 @@ const ChatHeader = () => {
   const messages = useSelector(messagesSelectors.selectAll);
   const currentChannelMessages = messages.filter(({ channelId }) => channelId === currentChannelId);
   return (
-        <div
+      <div
             className="bg-light mb-4 p-3 pb-3 shadow-sm small"
             style={{ borderRadius: '0px 30px 0px 0px', borderTop: '1px solid white' }}
         >
-            <p className="mb-0">
-                <b>
-                    {'# '}
-                    {currentChannel ? currentChannel.name : null}
-                </b>
-            </p>
-            <span className="text-muted">{t('chat.messagesCount', { count: currentChannelMessages.length })}</span>
-        </div>
+          <p className="mb-0">
+              <b>
+                  {'# '}
+                  {currentChannel ? currentChannel.name : null}
+              </b>
+          </p>
+          <span className="text-muted">{t('chat.messagesCount', { count: currentChannelMessages.length })}</span>
+      </div>
   );
 };
 
 const Message = ({ username, message }) => (
-      <div className="text-break mb-2">
-          <b>{username}</b>
-          {`: ${message}`}
-      </div>
+    <div className="text-break mb-2">
+        <b>{username}</b>
+        {`: ${message}`}
+    </div>
 );
 
 const ChatBody = () => {
@@ -55,11 +55,11 @@ const ChatBody = () => {
   }, [currentChannelMessages]);
 
   return (
-        <div id="messages-box" className="chat-messages overflow-auto px-5" ref={scrollRef}>
-            {currentChannelMessages && currentChannelMessages.map((message) => (
-                <Message username={message.username} message={message.body} key={message.id} />
-            ))}
-        </div>
+      <div id="messages-box" className="chat-messages overflow-auto px-5" ref={scrollRef}>
+          {currentChannelMessages && currentChannelMessages.map((message) => (
+              <Message username={message.username} message={message.body} key={message.id} />
+          ))}
+      </div>
   );
 };
 
@@ -134,8 +134,8 @@ const ChatInputField = () => {
 };
 
 const ChatLayout = () => (
-      <Col className="p-0 h-100">
-          <div
+    <Col className="p-0 h-100">
+        <div
               className="d-flex flex-column h-100 bg-light"
               style={{
                 borderRadius: '0px 32px 8px 0px',
@@ -145,11 +145,11 @@ const ChatLayout = () => (
                 borderLeft: '0px solid orange',
               }}
           >
-              <ChatHeader />
-              <ChatBody />
-              <ChatInputField />
-          </div>
-      </Col>
+            <ChatHeader />
+            <ChatBody />
+            <ChatInputField />
+        </div>
+    </Col>
 );
 
 export default ChatLayout;

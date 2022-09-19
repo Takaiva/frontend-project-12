@@ -6,7 +6,7 @@ function LoginInputField({
   formik, label, name, inputRef = null, authIsFailed,
 }) {
   const { t } = useTranslation();
-  const isInvalid = (formik.touched[name] && formik.errors[name]) || authIsFailed;
+  const isInvalid = authIsFailed;
 
   const authRejected = name === 'password'
     ? (
@@ -29,7 +29,7 @@ function LoginInputField({
     >
       <Form.Control
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
-        isInvalid={isInvalid}
+        isInvalid={authIsFailed}
         name={name}
         onChange={formik.handleChange}
         placeholder={label}

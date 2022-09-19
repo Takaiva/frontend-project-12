@@ -7,7 +7,7 @@ function SignUpInputField({
 }) {
   const { t } = useTranslation();
 
-  const isInvalid = (formik.touched[name] && formik.errors[name]) || regIsFailed;
+  const isInvalid = regIsFailed;
   const isConflict = name === 'confirmPassword' ? t('signup.errors.alreadyExists') : null;
 
   return (
@@ -18,7 +18,7 @@ function SignUpInputField({
     >
       <Form.Control
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
-        isInvalid={isInvalid}
+        isInvalid={regIsFailed}
         name={name}
         onBlur={formik.handleBlur}
         onChange={formik.handleChange}

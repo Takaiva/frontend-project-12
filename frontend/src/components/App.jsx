@@ -15,10 +15,10 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Navbar from './Navbar.jsx';
 import LoginPage from './LoginPage.jsx';
 import SignUpPage from './SignUpPage.jsx';
 import ChatPage from './ChatPage.jsx';
-import Navbar from './Navbar.jsx';
 import PageNotFound from './PageNotFound.jsx';
 import ModalWindow from './modalComponents/ModalWindow.jsx';
 

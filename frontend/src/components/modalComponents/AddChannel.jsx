@@ -59,7 +59,7 @@ function AddChannel() {
       centered
       onHide={() => dispatch(modalActions.closeModalWindow())}
       show
-      >
+    >
       <Modal.Header closeButton>
         <Modal.Title>
           {t('modals.addChannelHeader')}
@@ -72,7 +72,7 @@ function AddChannel() {
             <FloatingLabel
               controlId="name"
               label={t('modals.addChannelPlaceholder')}
-                      >
+            >
               <Form.Control
                 isInvalid={!!formik.errors.name}
                 name="name"
@@ -80,7 +80,7 @@ function AddChannel() {
                 placeholder={t('modals.addChannelPlaceholder')}
                 ref={inputRef}
                 value={formik.values.name}
-                          />
+              />
 
               <Form.Control.Feedback type="invalid">
                 {formik.errors.name ? formik.errors.name : null}
@@ -93,7 +93,7 @@ function AddChannel() {
               className="me-3 btn modal-btn-cancel"
               onClick={() => dispatch(modalActions.closeModalWindow())}
               type="button"
-                      >
+            >
               {t('modals.cancelButton')}
             </button>
 
@@ -101,7 +101,7 @@ function AddChannel() {
               className="btn modal-btn-submit"
               disabled={isDisabled}
               type="submit"
-                      >
+            >
               {t('modals.submitButton')}
             </button>
           </div>

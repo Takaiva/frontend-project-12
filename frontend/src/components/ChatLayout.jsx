@@ -22,7 +22,7 @@ function ChatHeader() {
     <div
       className="bg-light mb-4 p-3 pb-3 shadow-sm small"
       style={{ borderRadius: '0px 30px 0px 0px', borderTop: '1px solid white' }}
-      >
+    >
       <p className="mb-0">
         <b>
           {'# '}
@@ -39,13 +39,15 @@ function ChatHeader() {
 }
 
 function Message({ username, message }) {
-  return (<div className="text-break mb-2">
-    <b>
-      {username}
-    </b>
+  return (
+    <div className="text-break mb-2">
+      <b>
+        {username}
+      </b>
 
-    {`: ${message}`}
-  </div>);
+      {`: ${message}`}
+    </div>
+  );
 }
 
 function ChatBody() {
@@ -66,13 +68,13 @@ function ChatBody() {
       className="chat-messages overflow-auto px-5"
       id="messages-box"
       ref={scrollRef}
-      >
+    >
       {currentChannelMessages ? currentChannelMessages.map((message) => (
         <Message
           key={message.id}
           message={message.body}
           username={message.username}
-              />
+        />
       )) : null}
     </div>
   );
@@ -120,7 +122,7 @@ function ChatInputField() {
         noValidate
         onSubmit={handleSendMessage}
         style={{ border: '1px solid rgba(112, 110, 110, 0.4)' }}
-          >
+      >
         <InputGroup className="has-validation">
           <Form.Control
             aria-label={t('chat.newMessageAriaLabel')}
@@ -130,25 +132,25 @@ function ChatInputField() {
             placeholder={t('chat.newMessagePlaceholder')}
             ref={inputRef}
             value={message}
-                  />
+          />
 
           <button
             className="btn btn-group-vertical"
             disabled={message === ''}
             id="sendMessageButton"
             type="submit"
-                  >
+          >
             <svg
               fill="currentColor"
               height="20"
               viewBox="0 0 16 16"
               width="20"
               xmlns="http://www.w3.org/2000/svg"
-                      >
+            >
               <path
                 d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
                 fillRule="evenodd"
-                          />
+              />
             </svg>
 
             <span className="visually-hidden">
@@ -162,24 +164,26 @@ function ChatInputField() {
 }
 
 function ChatLayout() {
-  return (<Col className="p-0 h-100">
-    <div
-      className="d-flex flex-column h-100 bg-light"
-      style={{
-        borderRadius: '0px 32px 8px 0px',
-        borderTop: '1px solid white',
-        borderBottom: '1px solid white',
-        borderRight: '1px solid white',
-        borderLeft: '0px solid orange',
-      }}
+  return (
+    <Col className="p-0 h-100">
+      <div
+        className="d-flex flex-column h-100 bg-light"
+        style={{
+          borderRadius: '0px 32px 8px 0px',
+          borderTop: '1px solid white',
+          borderBottom: '1px solid white',
+          borderRight: '1px solid white',
+          borderLeft: '0px solid orange',
+        }}
       >
-      <ChatHeader />
+        <ChatHeader />
 
-      <ChatBody />
+        <ChatBody />
 
-      <ChatInputField />
-    </div>
-  </Col>);
+        <ChatInputField />
+      </div>
+    </Col>
+  );
 }
 
 export default ChatLayout;

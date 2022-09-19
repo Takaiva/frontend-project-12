@@ -22,7 +22,7 @@ function LoginInputField({
       className="mb-3"
       controlId={name}
       label={label}
-      >
+    >
       <Form.Control
         {...props}
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
@@ -35,7 +35,7 @@ function LoginInputField({
         style={{ borderRadius: '5px 15px 5px 15px' }}
         type={name === 'password' ? 'password' : null}
         value={formik.values[name]}
-          />
+      />
 
       {feedback}
     </FloatingLabel>

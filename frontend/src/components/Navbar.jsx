@@ -15,12 +15,12 @@ function NavbarLayout() {
       bg="dark"
       className="shadow-sm"
       expand="lg"
-      >
+    >
       <Container>
         <Navbar.Brand
           className="atures-font"
           href={routes.chatPagePath()}
-              >
+        >
           Hexlet Chat
         </Navbar.Brand>
 
@@ -28,7 +28,7 @@ function NavbarLayout() {
           className="btn logout"
           onClick={logOut}
           type="button"
-                       >
+                 >
           {t('logout')}
         </button> : null }
       </Container>

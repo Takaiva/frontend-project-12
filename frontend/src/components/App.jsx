@@ -84,7 +84,7 @@ function ChatApiProvider({ children }) {
         renameChannel,
         removeChannel,
       }}
-      >
+    >
       {children}
     </ApiContext.Provider>
   );
@@ -123,7 +123,7 @@ function AuthProvider({ children }) {
         getUserName,
         user,
       }}
-      >
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -150,7 +150,7 @@ function App() {
         <div
           className="d-flex flex-column h-100"
           id="fading"
-              >
+        >
           <Navbar />
 
           <Routes>
@@ -159,29 +159,29 @@ function App() {
                 <SignUpPage />
               </IsLoggedIn>}
               path={routes.registrationPagePath()}
-                      />
+            />
 
             <Route
               element={<IsLoggedIn>
                 <LoginPage />
               </IsLoggedIn>}
               path={routes.loginPagePath()}
-                      />
+            />
 
             <Route
               element={<PrivateOutlet />}
               path={routes.chatPagePath()}
-                      >
+            >
               <Route
                 element={<ChatPage />}
                 path=""
-                          />
+              />
             </Route>
 
             <Route
               element={<PageNotFound />}
               path="*"
-                      />
+            />
           </Routes>
 
           <ModalWindow />
@@ -197,7 +197,7 @@ function App() {
           pauseOnHover
           position="top-right"
           rtl={false}
-              />
+        />
       </Router>
     </ChatApiProvider>
   </AuthProvider>);

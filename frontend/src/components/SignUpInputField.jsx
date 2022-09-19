@@ -14,7 +14,7 @@ function SignUpInputField({
       className="mb-3"
       controlId={name}
       label={label}
-      >
+    >
       <Form.Control
         {...props}
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
@@ -27,7 +27,7 @@ function SignUpInputField({
         required
         style={{ borderRadius: '5px 15px 5px 15px' }}
         value={formik.values[name]}
-          />
+      />
 
       <Form.Control.Feedback type="invalid">
         {formik.errors[name] ? formik.errors[name] : isConflict}

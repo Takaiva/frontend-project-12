@@ -37,7 +37,7 @@ function RemoveChannel() {
       centered
       onHide={() => dispatch(modalActions.closeModalWindow())}
       show
-      >
+    >
       <Modal.Header closeButton>
         <Modal.Title>
           {t('modals.removeChannelHeader')}
@@ -54,7 +54,7 @@ function RemoveChannel() {
             className="me-3 btn modal-btn-cancel"
             onClick={() => dispatch(modalActions.closeModalWindow())}
             type="button"
-                  >
+          >
             {t('modals.cancelButton')}
           </button>
 
@@ -63,7 +63,7 @@ function RemoveChannel() {
             disabled={isDisabled}
             onClick={handleRemoveChannel}
             type="submit"
-                  >
+          >
             {t('modals.removeChannelButton')}
           </button>
         </div>

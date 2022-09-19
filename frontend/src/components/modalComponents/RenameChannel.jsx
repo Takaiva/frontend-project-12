@@ -62,7 +62,7 @@ function RenameChannel() {
       centered
       onHide={() => dispatch(modalActions.closeModalWindow())}
       show
-      >
+    >
       <Modal.Header closeButton>
         <Modal.Title>
           {t('modals.renameChannelHeader')}
@@ -75,7 +75,7 @@ function RenameChannel() {
             <FloatingLabel
               controlId="name"
               label={t('modals.renameChannelPlaceholder')}
-                      >
+            >
               <Form.Control
                 isInvalid={!!formik.errors.name}
                 name="name"
@@ -83,7 +83,7 @@ function RenameChannel() {
                 placeholder={channelBeingEdited.name}
                 ref={inputRef}
                 value={formik.values.name}
-                          />
+              />
 
               <Form.Control.Feedback type="invalid">
                 {formik.errors.name ? formik.errors.name : null}
@@ -96,7 +96,7 @@ function RenameChannel() {
               className="me-3 btn modal-btn-cancel"
               onClick={() => dispatch(modalActions.closeModalWindow())}
               type="button"
-                      >
+            >
               {t('modals.cancelButton')}
             </button>
 
@@ -104,7 +104,7 @@ function RenameChannel() {
               className="btn modal-btn-submit"
               disabled={isDisabled}
               type="submit"
-                      >
+            >
               {t('modals.submitButton')}
             </button>
           </div>

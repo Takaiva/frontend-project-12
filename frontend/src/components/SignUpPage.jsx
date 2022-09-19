@@ -83,13 +83,13 @@ function SignUpPage() {
       className="h-100"
       fluid
       id="wallpaper"
-      >
+    >
       <Row className="h-100 justify-content-center align-content-center">
         <Col
           className="col-12"
           md="8"
           xxl="6"
-              >
+        >
           <Card className="shadow">
             <Card.Body className="row p-5">
               <h1 className="my-4 text-center">
@@ -100,14 +100,14 @@ function SignUpPage() {
                 className="col-12 col-md-0 mt-3 mt-mb-0"
                 noValidate
                 onSubmit={formik.handleSubmit}
-                          >
+              >
                 <SignUpInputField
                   formik={formik}
                   inputRef={inputRef}
                   label={t('signup.username')}
                   name="username"
                   regIsFailed={regIsFailed}
-                              />
+                />
 
                 <SignUpInputField
                   formik={formik}
@@ -115,7 +115,7 @@ function SignUpPage() {
                   name="password"
                   regIsFailed={regIsFailed}
                   type="password"
-                              />
+                />
 
                 <SignUpInputField
                   formik={formik}
@@ -123,7 +123,7 @@ function SignUpPage() {
                   name="confirmPassword"
                   regIsFailed={regIsFailed}
                   type="password"
-                              />
+                />
 
                 <Button
                   className="w-100 mb-3 pb-3 pt-3 shadow-sm"
@@ -135,7 +135,7 @@ function SignUpPage() {
                   }}
                   type="submit"
                   variant="outline-primary"
-                              >
+                >
                   {t('signup.submitButton')}
                 </Button>
               </Form>

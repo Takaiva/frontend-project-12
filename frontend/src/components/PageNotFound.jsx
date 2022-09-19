@@ -18,7 +18,7 @@ function PageNotFound() {
         <Link
           style={{ color: 'dodgerblue' }}
           to="/"
-              >
+        >
           {t('notFound.linkText')}
         </Link>
       </p>

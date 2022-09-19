@@ -24,13 +24,14 @@ function NavbarLayout() {
           Hexlet Chat
         </Navbar.Brand>
 
-        { (user ? <button
-          className="btn logout"
-          onClick={logOut}
-          type="button"
-                  >
-          {t('logout')}
-        </button> : null) }
+        { user ? (
+          <button
+            className="btn logout"
+            onClick={logOut}
+            type="button"
+          >
+            {t('logout')}
+          </button>) : null }
       </Container>
     </Navbar>
   );

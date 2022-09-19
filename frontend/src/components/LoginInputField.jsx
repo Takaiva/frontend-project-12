@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 
 function LoginInputField({
-  formik, label, name, inputRef = null, authIsFailed, ...props
+  formik, label, name, inputRef = null, authIsFailed,
 }) {
   const { t } = useTranslation();
   const isInvalid = (formik.touched[name] && formik.errors[name]) || authIsFailed;
@@ -28,7 +28,6 @@ function LoginInputField({
       label={label}
     >
       <Form.Control
-        {...props}
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
         isInvalid={isInvalid}
         name={name}

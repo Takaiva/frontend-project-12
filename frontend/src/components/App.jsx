@@ -156,16 +156,18 @@ function App() {
 
             <Routes>
               <Route
-                element={<IsLoggedIn>
-                  <SignUpPage />
-                </IsLoggedIn>}
+                element={(
+                  <IsLoggedIn>
+                    <SignUpPage />
+                  </IsLoggedIn>)}
                 path={routes.registrationPagePath()}
               />
 
               <Route
-                element={<IsLoggedIn>
-                  <LoginPage />
-                </IsLoggedIn>}
+                element={(
+                  <IsLoggedIn>
+                    <LoginPage />
+                  </IsLoggedIn>)}
                 path={routes.loginPagePath()}
               />
 

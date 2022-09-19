@@ -16,3 +16,4 @@ rules:
   import/extensions: 0
   no-console: 0
   "react/prop-types": "off"
+  "react/jsx-indent": "off"

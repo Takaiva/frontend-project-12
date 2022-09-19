@@ -66,7 +66,7 @@ function AddChannel() {
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body >
+      <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3">
             <FloatingLabel

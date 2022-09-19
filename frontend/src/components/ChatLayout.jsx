@@ -116,7 +116,7 @@ function ChatInputField() {
   };
 
   return (
-    <div className="mt-auto px-5 py-3" >
+    <div className="mt-auto px-5 py-3">
       <Form
         className="py-1 rounded-2"
         noValidate

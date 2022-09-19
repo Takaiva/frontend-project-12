@@ -44,7 +44,7 @@ function RemoveChannel() {
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body >
+      <Modal.Body>
         <p className="lead">
           {t('modals.removeChannelBody')}
         </p>

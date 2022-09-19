@@ -144,63 +144,65 @@ function PrivateOutlet() {
 }
 
 function App() {
-  return (<AuthProvider>
-    <ChatApiProvider>
-      <Router>
-        <div
-          className="d-flex flex-column h-100"
-          id="fading"
-        >
-          <Navbar />
+  return (
+    <AuthProvider>
+      <ChatApiProvider>
+        <Router>
+          <div
+            className="d-flex flex-column h-100"
+            id="fading"
+          >
+            <Navbar />
 
-          <Routes>
-            <Route
-              element={<IsLoggedIn>
-                <SignUpPage />
-              </IsLoggedIn>}
-              path={routes.registrationPagePath()}
-            />
-
-            <Route
-              element={<IsLoggedIn>
-                <LoginPage />
-              </IsLoggedIn>}
-              path={routes.loginPagePath()}
-            />
-
-            <Route
-              element={<PrivateOutlet />}
-              path={routes.chatPagePath()}
-            >
+            <Routes>
               <Route
-                element={<ChatPage />}
-                path=""
+                element={<IsLoggedIn>
+                  <SignUpPage />
+                </IsLoggedIn>}
+                path={routes.registrationPagePath()}
               />
-            </Route>
 
-            <Route
-              element={<PageNotFound />}
-              path="*"
-            />
-          </Routes>
+              <Route
+                element={<IsLoggedIn>
+                  <LoginPage />
+                </IsLoggedIn>}
+                path={routes.loginPagePath()}
+              />
 
-          <ModalWindow />
-        </div>
+              <Route
+                element={<PrivateOutlet />}
+                path={routes.chatPagePath()}
+              >
+                <Route
+                  element={<ChatPage />}
+                  path=""
+                />
+              </Route>
 
-        <ToastContainer
-          autoClose={5000}
-          closeOnClick
-          draggable
-          hideProgressBar={false}
-          newestOnTop={false}
-          pauseOnFocusLoss
-          pauseOnHover
-          position="top-right"
-          rtl={false}
-        />
-      </Router>
-    </ChatApiProvider>
-  </AuthProvider>);
+              <Route
+                element={<PageNotFound />}
+                path="*"
+              />
+            </Routes>
+
+            <ModalWindow />
+          </div>
+
+          <ToastContainer
+            autoClose={5000}
+            closeOnClick
+            draggable
+            hideProgressBar={false}
+            newestOnTop={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            position="top-right"
+            rtl={false}
+          />
+        </Router>
+      </ChatApiProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;

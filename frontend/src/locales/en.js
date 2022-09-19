@@ -14,6 +14,7 @@ export default {
       },
     },
     logout: 'Log out',
+    navbarHeader: 'Station301',
     signup: {
       username: 'Username',
       password: 'Password',

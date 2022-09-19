@@ -21,7 +21,7 @@ function NavbarLayout() {
           className="atures-font"
           href={routes.chatPagePath()}
         >
-          Hexlet Chat
+          {t('navbarHeader')}
         </Navbar.Brand>
 
         { user ? (

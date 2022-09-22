@@ -1,8 +1,6 @@
 import '../styles/App.scss';
 import '../styles/index.scss';
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { io } from 'socket.io-client';
+import React, { useState } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -24,34 +22,9 @@ import ModalWindow from './modalComponents/ModalWindow.jsx';
 
 import { AuthContext, ApiContext } from '../contexts';
 import { useAuth } from '../hooks';
-
-import { actions as chatActions } from '../slices/messagesSlice.js';
-import { actions as channelsActions } from '../slices/channelsSlice.js';
-
 import routes from '../routes.js';
 
-function ChatApiProvider({ children }) {
-  const socket = io();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    socket.on('newMessage', (message) => {
-      dispatch(chatActions.addMessage(message));
-    });
-    socket.on('newChannel', (channel) => {
-      dispatch(channelsActions.addChannel(channel));
-    });
-    socket.on('renameChannel', (channel) => {
-      dispatch(channelsActions.renameChannel({
-        id: channel.id,
-        changes: { name: channel.name },
-      }));
-    });
-    socket.on('removeChannel', ({ id }) => {
-      dispatch(channelsActions.removeChannel(id));
-    });
-  }, [socket, dispatch]);
-
+function ChatApiProvider({ children, socket }) {
   const sendMessage = (message, handleResponse) => {
     socket.emit('newMessage', message, (response) => {
       handleResponse(response);
@@ -143,10 +116,10 @@ function PrivateOutlet() {
   );
 }
 
-function App() {
+function App({ socket }) {
   return (
     <AuthProvider>
-      <ChatApiProvider>
+      <ChatApiProvider socket={socket}>
         <Router>
           <div
             className="d-flex flex-column h-100"

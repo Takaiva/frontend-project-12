@@ -65,7 +65,7 @@ export default async (socket) => {
         <I18nextProvider i18n={i18n}>
           <StoreProvider store={store}>
             <SocketSubscribe socket={socket}>
-              <App socket={socket}/>
+              <App socket={socket} />
             </SocketSubscribe>
           </StoreProvider>
         </I18nextProvider>

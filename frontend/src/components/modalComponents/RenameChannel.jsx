@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -15,7 +15,6 @@ import { useApi } from '../../hooks';
 function RenameChannel() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [isDisabled, setDisabled] = useState(false);
   const { renameChannel } = useApi();
   const channels = useSelector(channelsSelectors.selectAll);
   const channelsNames = channels.map((channel) => channel.name);
@@ -46,13 +45,13 @@ function RenameChannel() {
         .min(3, t('modals.errors.minLength'))
         .max(20, t('modals.errors.maxLength')),
     }),
-    onSubmit: () => {
-      setDisabled(true);
+    onSubmit: (values, actions) => {
+      actions.setSubmitting(true);
       renameChannel({
         id: channelBeingEdited.id,
-        name: formik.values.name,
+        name: values.name,
       }, handleResponse);
-      setDisabled(false);
+      actions.setSubmitting(false);
     },
   });
 
@@ -102,7 +101,7 @@ function RenameChannel() {
 
             <button
               className="btn modal-btn-submit"
-              disabled={isDisabled}
+              disabled={formik.isSubmitting}
               type="submit"
             >
               {t('modals.submitButton')}

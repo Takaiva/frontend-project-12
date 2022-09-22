@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -15,7 +15,6 @@ import { useApi } from '../../hooks';
 function AddChannel() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [isDisabled, setDisabled] = useState(false);
   const { addChannel } = useApi();
   const channels = useSelector(channelsSelectors.selectAll);
   const channelsNames = channels.map((channel) => channel.name);
@@ -46,10 +45,10 @@ function AddChannel() {
         .min(3, t('modals.errors.minLength'))
         .max(20, t('modals.errors.maxLength')),
     }),
-    onSubmit: () => {
-      setDisabled(true);
-      addChannel(formik.values, handleResponse);
-      setDisabled(false);
+    onSubmit: (values, actions) => {
+      actions.setSubmitting(true);
+      addChannel(values, handleResponse);
+      actions.setSubmitting(false);
     },
   });
 
@@ -99,7 +98,7 @@ function AddChannel() {
 
             <button
               className="btn modal-btn-submit"
-              disabled={isDisabled}
+              disabled={formik.isSubmitting}
               type="submit"
             >
               {t('modals.submitButton')}

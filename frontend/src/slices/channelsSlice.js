@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import fetchData from '../thunks/fetchData.js';
 
@@ -12,11 +13,11 @@ const channelsSlice = createSlice({
     addChannel: channelsAdapter.addOne,
     renameChannel: channelsAdapter.updateOne,
     changeChannel: (state, { payload }) => {
-      state.currentChannelId = payload; // eslint-disable-line no-param-reassign
+      state.currentChannelId = payload;
     },
     removeChannel: (state, { payload }) => {
       if (state.currentChannelId === payload) {
-        state.currentChannelId = 1; // eslint-disable-line no-param-reassign
+        state.currentChannelId = 1;
       }
       channelsAdapter.removeOne(state, payload);
     },
@@ -24,7 +25,7 @@ const channelsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, { payload }) => {
       channelsAdapter.addMany(state, payload.channels);
-      state.currentChannelId = payload.currentChannelId; // eslint-disable-line no-param-reassign
+      state.currentChannelId = payload.currentChannelId;
     });
   },
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -10,12 +11,12 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     openModalWindow: (state, { payload }) => {
-      state.type = payload.type; // eslint-disable-line no-param-reassign
-      state.item = payload.item; // eslint-disable-line no-param-reassign
+      state.type = payload.type;
+      state.item = payload.item;
     },
     closeModalWindow: (state) => {
-      state.type = null; // eslint-disable-line no-param-reassign
-      state.item = null; // eslint-disable-line no-param-reassign
+      state.type = null;
+      state.item = null;
     },
   },
 });

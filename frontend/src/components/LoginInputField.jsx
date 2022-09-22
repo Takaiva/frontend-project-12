@@ -6,7 +6,7 @@ function LoginInputField({
   formik, label, name, inputRef = null, authIsFailed,
 }) {
   const { t } = useTranslation();
-  const isInvalid = authIsFailed;
+  const isInvalid = (formik.touched[name] && formik.errors[name]) || authIsFailed;
 
   const authRejected = name === 'password'
     ? (

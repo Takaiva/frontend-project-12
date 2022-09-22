@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 
 function SignUpInputField({
-  formik, label, name, inputRef = null, regIsFailed,
+  formik, label, name, inputRef = null, regIsFailed, type,
 }) {
   const { t } = useTranslation();
 
-  const isInvalid = regIsFailed;
+  const isInvalid = (formik.touched[name] && formik.errors[name]) || regIsFailed;
   const isConflict = name === 'confirmPassword' ? t('signup.errors.alreadyExists') : null;
 
   return (
@@ -18,8 +18,9 @@ function SignUpInputField({
     >
       <Form.Control
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
-        isInvalid={regIsFailed}
+        isInvalid={isInvalid}
         name={name}
+        type={type}
         onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         placeholder={label}

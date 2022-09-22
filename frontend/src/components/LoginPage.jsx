@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
+import { useRollbar } from '@rollbar/react';
 
 import {
   Button, Card, Form, Row, Col, Container,
@@ -22,6 +23,7 @@ function LoginPage() {
   const { logIn } = useAuth();
   const navigate = useNavigate();
   const inputRef = useRef();
+  const rollbar = useRollbar();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -45,6 +47,7 @@ function LoginPage() {
         setAuthIsFailed(false);
         navigate(routes.chatPagePath());
         toast.success(t('notifications.authSuccess', { username: response.data.username }));
+        rollbar.info(`${response.data.username} logged in`); // eslint-disable-line no-undef
       } catch (err) {
         if (!err.isAxiosError) {
           toast.error(t('errors.unknown'));

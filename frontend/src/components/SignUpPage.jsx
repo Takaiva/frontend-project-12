@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
+import { useRollbar } from '@rollbar/react';
 
 import {
   Button,
@@ -22,6 +23,7 @@ import SignUpInputField from './SignUpInputField.jsx';
 import routes from '../routes.js';
 
 function SignUpPage() {
+  const rollbar = useRollbar();
   const { t } = useTranslation();
   const [regIsFailed, setRegIsFailed] = useState(false);
   const navigate = useNavigate();
@@ -63,6 +65,7 @@ function SignUpPage() {
         logIn(response.data);
         navigate(routes.chatPagePath());
         toast.success(t('notifications.authSuccess', { username: response.data.username }));
+        rollbar.info(`${response.data.username} logged in`); // eslint-disable-line no-undef
       } catch (err) {
         if (!err.isAxiosError) {
           toast.error(t('errors.unknown'));

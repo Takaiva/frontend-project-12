@@ -65,7 +65,7 @@ function SignUpPage() {
         logIn(response.data);
         navigate(routes.chatPagePath());
         toast.success(t('notifications.authSuccess', { username: response.data.username }));
-        rollbar.info(`${response.data.username} logged in`); // eslint-disable-line no-undef
+        rollbar.info(`${response.data.username} logged in`);
       } catch (err) {
         if (!err.isAxiosError) {
           toast.error(t('errors.unknown'));

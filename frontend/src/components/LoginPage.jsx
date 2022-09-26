@@ -40,11 +40,13 @@ function LoginPage() {
       password: yup.string()
         .required(t('login.errors.password')),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values, actions) => {
       try {
+        actions.setSubmitting(true);
         const response = await axios.post(routes.loginPath(), values);
         logIn(response.data);
         setAuthIsFailed(false);
+        actions.setSubmitting(false);
         navigate(routes.chatPagePath());
         toast.success(t('notifications.authSuccess', { username: response.data.username }));
         rollbar.info(`${response.data.username} logged in`);
@@ -60,6 +62,7 @@ function LoginPage() {
           toast.error(t('errors.network'));
           throw err;
         }
+        actions.setSubmitting(false);
       }
     },
   });
@@ -103,6 +106,7 @@ function LoginPage() {
 
                 <Button
                   className="w-100 mb-3 mt-4 pb-3 pt-3 shadow-sm"
+                  disabled={formik.isSubmitting}
                   style={{
                     borderRadius: '15px',
                     lineHeight: '1rem',

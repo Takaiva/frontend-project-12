@@ -56,13 +56,15 @@ function SignUpPage() {
         .string()
         .test('confirmPassword', t('signup.errors.confirm'), (value, context) => value === context.parent.password),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values, actions) => {
       try {
+        actions.setSubmitting(true);
         const response = await axios.post(
           routes.registrationPath(),
           { username: values.username, password: values.password },
         );
         logIn(response.data);
+        actions.setSubmitting(false);
         navigate(routes.chatPagePath());
         toast.success(t('notifications.authSuccess', { username: response.data.username }));
         rollbar.info(`${response.data.username} logged in`);
@@ -78,6 +80,7 @@ function SignUpPage() {
           toast.error(t('errors.network'));
           throw err;
         }
+        actions.setSubmitting(false);
       }
     },
   });
@@ -130,6 +133,7 @@ function SignUpPage() {
 
                 <Button
                   className="w-100 mb-3 pb-3 pt-3 shadow-sm"
+                  disabled={formik.isSubmitting}
                   style={{
                     borderRadius: '15px',
                     lineHeight: '1rem',

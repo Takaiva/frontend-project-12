@@ -31,6 +31,7 @@ function LoginInputField({
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
         isInvalid={authIsFailed}
         name={name}
+        autoComplete={name === 'username' ? 'username' : 'current-password'}
         onChange={formik.handleChange}
         placeholder={label}
         ref={inputRef}

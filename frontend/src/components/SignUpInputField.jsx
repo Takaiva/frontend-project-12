@@ -18,6 +18,7 @@ function SignUpInputField({
     >
       <Form.Control
         className={`shadow-sm ${isInvalid ? '' : 'border-dark'}`}
+        autoComplete={name === 'username' ? 'username' : 'current-password'}
         isInvalid={isInvalid}
         name={name}
         type={type}

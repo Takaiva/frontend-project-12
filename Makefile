@@ -12,3 +12,5 @@ deploy:
 
 lint-frontend:
 	make -C frontend lint
+install:
+    make -C frontend install

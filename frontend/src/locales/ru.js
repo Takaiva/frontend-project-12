@@ -14,7 +14,7 @@ export default {
       },
     },
     logout: 'Выйти',
-    navbarHeader: 'Hexlet Chat',
+    navbarHeader: 'Station301',
     signup: {
       username: 'Имя пользователя',
       password: 'Пароль',

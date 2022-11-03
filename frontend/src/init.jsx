@@ -48,7 +48,7 @@ export default async (socket) => {
     .use(initReactI18next)
     .init({
       resources,
-      fallbackLng: 'ru',
+      fallbackLng: 'en',
     });
 
   filter.add(filter.getDictionary('en'));
